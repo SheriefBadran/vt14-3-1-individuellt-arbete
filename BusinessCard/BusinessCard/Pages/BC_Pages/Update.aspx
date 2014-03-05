@@ -64,5 +64,31 @@
     <div class="formItems">
         <asp:Button ID="FindButton" runat="server" Text="Find" OnClick="FindButton_Click" />
     </div>
+
+    <asp:FormView ID="BusinessCardFormView" runat="server"
+        ItemType="BusinessCard.Model.Person"
+        SelectMethod="BusinessCardFormView_GetItem"
+        UpdateMethod="BusinessCardFormView_UpdateItem"
+        DeleteMethod="BusinessCardFormView_DeleteItem"
+        DataKeyNames="PersonID">
+
+        <ItemTemplate>
+            <tr>
+                <td>
+                    <asp:Literal ID="FirstNameLiteral" runat="server" Text='<%#: Item.FirstName %>' />
+                </td>
+                <td>
+                    <asp:Literal ID="LastNameLiteral" runat="server" Text='<%#: Item.LastName %>' />
+                </td>
+                <td class="command">
+                        <%-- Command Buttons for update and delete --%>
+                    <%--<asp:LinkButton ID="LinkButton1" runat="server" CommandName="Delete" Text="Ta bort" CausesValidation="false" 
+                        OnClientClick='<%# String.Format("return confirm(\"Är du säker på att du vill ta bort kontakten {0} {1}?\")", Item.FirstName, Item.LastName) %>' />
+                    <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />--%>
+                </td>
+            </tr>
+        </ItemTemplate>
+
+    </asp:FormView>
 </asp:Content>
 
