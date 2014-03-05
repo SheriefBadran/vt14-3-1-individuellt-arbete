@@ -15,10 +15,10 @@
     <h3>Handle your business cards:</h3>
     <ul>
         <li>
-            <asp:HyperLink runat="server" Text="Add business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
+            <asp:HyperLink runat="server" Text="Upload business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
         </li>
         <li>
-            <asp:HyperLink runat="server" Text="Update business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardUpdate %>" />
+            <asp:HyperLink runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardUpdate %>" />
         </li>
         <li>            
             <a href="#">List all business cards</a>

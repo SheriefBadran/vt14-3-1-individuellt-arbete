@@ -1,16 +1,68 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Update.aspx.cs" Inherits="BusinessCard.Pages.BC_Pages.Update" %>
+﻿<%@ Page Title="Find BusinessCard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Update.aspx.cs" Inherits="BusinessCard.Pages.BC_Pages.Update" %>
 
-<!DOCTYPE html>
+<%-- HEADER SECTION --%>
+<asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <%-- Set in Title attribute at the top of this page. --%>
+                <h1><%: Title %>.</h1>
+                <%--<h2>Welcome to your business card handler!</h2>--%>
+            </hgroup>
+        </div>
+    </section>
+</asp:Content>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
+<%-- CONTENT SECTION --%>
+<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
+    <h3>Handle your business cards:</h3>
+    <ul>
+        <li>
+            <asp:HyperLink ID="HyperLink1" runat="server" Text="Upload business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
+        </li>
+        <li>
+            <asp:HyperLink ID="HyperLink2" runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardUpdate %>" />
+        </li>
+        <li>            
+            <a href="#">List all business cards</a>
+        </li>
+    </ul>
+</asp:Content>
+
+<%-- FORM SECTION --%>
+<asp:Content runat="server" ID="CreateForm" ContentPlaceHolderID="FormContent">
+    <h3>Search a business card...</h3>
+
+
+    <p>First name</p>
+    <asp:TextBox ID="FirstNameTextBox" MaxLength="20" runat="server"></asp:TextBox>
+
+    <%-- VALIDATION --%>
+    <%-- requiredfieldvalidator --%>
+    <%-- regularexpressionvalidator to prevent bad chars --%>
+
+    <p>Last name</p>
+    <asp:TextBox ID="LastNameTextBox" MaxLength="20" runat="server"></asp:TextBox>
+
+    <%-- VALIDATION --%>
+    <%-- requiredfieldvalidator --%>
+    <%-- regularexpressionvalidator to prevent bad chars --%>
+
+    <p>Company</p>
+    <asp:TextBox ID="CompanyTextBox" MaxLength="40" runat="server"></asp:TextBox>
+
+    <%-- VALIDATION --%>
+    <%-- requiredfieldvalidatior --%>
+    <%-- regularexpressionvalidator to prevent bad chars --%>
+
+
+    <p>Convention date</p>
+    <asp:TextBox ID="DateTextBox" runat="server"></asp:TextBox>
+    <%-- requiredfieldvalidator --%>
+    <%-- regularexpressionvalidator to validate given date format --%>
+
+    <div class="formItems">
+        <asp:Button ID="FindButton" runat="server" Text="Find" OnClick="FindButton_Click" />
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+

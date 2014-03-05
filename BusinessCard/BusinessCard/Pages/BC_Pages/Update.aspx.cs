@@ -13,5 +13,10 @@ namespace BusinessCard.Pages.BC_Pages
         {
 
         }
+
+        protected void FindButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
