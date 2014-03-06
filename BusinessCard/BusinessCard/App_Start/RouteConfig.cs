@@ -15,6 +15,7 @@ namespace BusinessCard
             routes.MapPageRoute("BusinessCardUpdate", "BusinessCard/Find", "~/Pages/BC_Pages/Update.aspx");
             routes.MapPageRoute("RootDefault", "", "~/Pages/BC_Pages/Start.aspx");
             routes.MapPageRoute("Default", "BusinessCard/Start", "~/Pages/BC_Pages/Start.aspx");
+            routes.MapPageRoute("BusinessCardList", "BusinessCard/ListAll", "~/Pages/BC_Pages/PersonList.aspx");
         }
     }
 }

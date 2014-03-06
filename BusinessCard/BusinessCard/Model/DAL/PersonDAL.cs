@@ -22,6 +22,107 @@ namespace BusinessCard.Model.DAL
 
 
         // Methods
+        #region GetPersons()
+        public IEnumerable<Person> GetPersons()
+        {
+            using (var connection = CreateConnection())
+            {
+                try
+                {
+                    // Create a list object for 100 Person references.
+                    var persons = new List<Person>(100);
+
+                    // Create SqlCommand object to execute stored procedure.
+                    _cmd = new SqlCommand(USP_GET_PERSONS, connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Open database connection
+                    connection.Open();
+
+                    // The stored procedure returns a set of persons.
+                    // The Sql reader object holds the set of persons and the method ExecuteReader creates an SqlDataReader-object and
+                    // returns a reference to the object.
+                    using (var reader = _cmd.ExecuteReader())
+                    {
+                        // Retrieve the index corresponding all the collumns.
+                        var personIdIndex = reader.GetOrdinal("PersonID");
+                        var firstNameIndex = reader.GetOrdinal("FirstName");
+                        var lastNameIndex = reader.GetOrdinal("LastName");
+
+                        // reader.Read returns a boolean.
+                        while (reader.Read())
+                        {
+                            // Eeach iteration retrieves data for one db table row.
+                            persons.Add(new Person
+                            {
+                                PersonID = reader.GetInt32(personIdIndex),
+                                FirstName = reader.GetString(firstNameIndex),
+                                LastName = reader.GetString(lastNameIndex)
+                            });
+                        }
+                    }
+
+                    // Set List capasity to actual number of elements
+                    persons.TrimExcess();
+
+                    // Return the the List containing Person objects.
+                    return persons;
+                }
+                catch
+                {
+                    throw new ApplicationException("Error! Unable to get persons from the database.");
+                }
+            }            
+        }
+        #endregion
+
+        #region GetCompanyIdByPersonId(int personID)
+        public Employment GetCompanyIdByPersonId(int personID)
+        {
+            try
+            {
+                using (var connection = CreateConnection())
+                {
+                    _cmd = new SqlCommand(USP_GET_PERSON_BY_NAME, connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameter id for stored procedure to return person
+                    _cmd.Parameters.Add("@PersonID", SqlDbType.Int, 4).Value = personID;
+
+                    connection.Open();
+
+                    using (var reader = _cmd.ExecuteReader())
+                    {
+
+                        if (reader.Read())
+                        {
+                            int companyIdIndex = reader.GetOrdinal("CompanyID");
+                            int employmentIdIndex = reader.GetOrdinal("EmploymentID");
+                            int convenDateIndex = reader.GetOrdinal("ConvenDate");
+                            int industryIdIndex = reader.GetOrdinal("IndustryID");
+                            int personIdIndex = reader.GetOrdinal("PersonID");
+
+                            return new Employment
+                            {
+                                // Sproc doesn't return PersonID
+                                CompanyID = reader.GetInt32(companyIdIndex),
+                                EmploymentID = reader.GetInt32(employmentIdIndex),
+                                ConvenDate = reader.GetDateTime(convenDateIndex),
+                                PersonID = personID
+                            };
+                        }
+                    }
+                    return null;
+                }
+            }
+            catch
+            {
+                throw new ApplicationException("An error occured in the data access layer");
+            }
+        }
+        #endregion
+
+        #region GetPersonByName(string firstName)
         public Person GetPersonByName(string firstName)
         {
             try
@@ -62,7 +163,9 @@ namespace BusinessCard.Model.DAL
                 throw new ApplicationException("An error occured in the data access layer");
             }
         }
+        #endregion
 
+        #region DeletePerson(int personID)
         public void DeletePerson(int personID)
         {
             // Skapar och initierar ett anslutningsobjekt.
@@ -88,7 +191,9 @@ namespace BusinessCard.Model.DAL
                 }
             }
         }
+        #endregion
 
+        #region DeletePersonById(int personID)
         public Person GetPersonById(int personID)
         {
             // Create SqlCommand object to execute stored procedure.
@@ -130,7 +235,9 @@ namespace BusinessCard.Model.DAL
                 throw new ApplicationException("An error occured in the data access layer");
             }
         }
+        #endregion
 
+        #region InsertPerson(Person person)
         public void InsertPerson(Person person)
         {
             using (var connection = CreateConnection())
@@ -163,7 +270,9 @@ namespace BusinessCard.Model.DAL
                 }
             }
         }
+        #endregion
 
+        #region UpdatePerson(Person person)
         public void UpdatePerson(Person person)
         {
             // Create SqlCommand object to execute stored procedure.
@@ -190,5 +299,6 @@ namespace BusinessCard.Model.DAL
                 }
             }
         }
+        #endregion
     }
 }

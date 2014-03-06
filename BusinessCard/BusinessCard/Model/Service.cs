@@ -26,5 +26,15 @@ namespace BusinessCard.Model
         {
             return PersonDAL.GetPersonByName(firstName);
         }
+
+        public Employment GetGetCompanyIdByPersonId(int personID)
+        {
+            return PersonDAL.GetCompanyIdByPersonId(personID);
+        }
+
+        public IEnumerable<Person> GetPersons()
+        {
+            return PersonDAL.GetPersons();
+        }
     }
 }

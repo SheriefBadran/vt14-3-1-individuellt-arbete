@@ -24,7 +24,7 @@
             <asp:HyperLink ID="HyperLink2" runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardUpdate %>" />
         </li>
         <li>            
-            <a href="#">List all business cards</a>
+            <asp:HyperLink ID="HyperLink3" runat="server" Text="List all business cards" NavigateUrl="<%$ RouteUrl:routename=BusinessCardList %>" />
         </li>
     </ul>
 </asp:Content>

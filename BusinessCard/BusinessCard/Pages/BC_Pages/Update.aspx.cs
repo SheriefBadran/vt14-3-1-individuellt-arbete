@@ -23,8 +23,11 @@ namespace BusinessCard.Pages.BC_Pages
 
         protected void FindButton_Click(object sender, EventArgs e)
         {
-
-            var person = Service.GetPersonByName(FirstNameTextBox.Text);
+            if (IsValid)
+            {
+                var person = Service.GetPersonByName(FirstNameTextBox.Text);
+                var companyID = Service.GetGetCompanyIdByPersonId(person.PersonID);
+            }         
         }
 
         // The id parameter should match the DataKeyNames value set on the control

@@ -16,7 +16,7 @@ namespace BusinessCard.Pages.BC_Pages
 
         protected void UploadButton_Click(object sender, EventArgs e)
         {
-
+            var FirstName = FirstNameTextBox.Text;
         }
     }
 }
