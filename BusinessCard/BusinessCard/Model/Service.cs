@@ -10,11 +10,17 @@ namespace BusinessCard.Model
     {
         // Private field
         private PersonDAL _personDal;
+        private EmploymentDAL _employmentDal;
 
         // Properties
         private PersonDAL PersonDAL
         {
             get { return _personDal ?? (_personDal = new PersonDAL()); }
+        }
+
+        private EmploymentDAL EmploymentDAL
+        {
+            get { return _employmentDal ?? (_employmentDal = new EmploymentDAL()); }
         }
 
         public Person GetPerson(int personID)
@@ -35,6 +41,30 @@ namespace BusinessCard.Model
         public IEnumerable<Person> GetPersons()
         {
             return PersonDAL.GetPersons();
+        }
+
+        public void SavePerson(Person person)
+        {
+            // TODO: Implement validation in Service Save method.
+            //ICollection<ValidationResult> validationResults;
+
+            //if (!person.Validate(out validationResults))
+            //{
+            //    var ex = new ValidationException("Objektet klarade inte valideringen.");
+            //    ex.Data.Add("ValidationResults", validationResults);
+            //    throw ex;
+            //}
+
+            if (person.PersonID == 0) // New post if ContactID is 0
+            {
+                PersonDAL.CreatePerson(person);
+            }
+            else
+            {
+               // TODO: Call UpdatePerson from Service -> Save()
+               // PersonDAL.UpdatePerson(person);
+                throw new NotImplementedException();
+            }
         }
     }
 }

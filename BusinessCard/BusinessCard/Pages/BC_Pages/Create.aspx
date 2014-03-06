@@ -33,36 +33,45 @@
 <asp:Content runat="server" ID="CreateForm" ContentPlaceHolderID="FormContent">
     <h3>Go ahead and upload...</h3>
 
+    <asp:FormView ID="InsertPerson" runat="server" 
+        ItemType="BusinessCard.Model.Person"
+        InsertMethod="InsertPerson_InsertItem" 
+        DataKeyNames="PersonID"
+        DefaultMode="Insert">
 
-    <p>First name</p>
-    <asp:TextBox ID="FirstNameTextBox" MaxLength="20" runat="server"></asp:TextBox>
+        <InsertItemTemplate>
+            <p>First name</p>
+            <asp:TextBox ID="FirstNameTextBox" Text='<%#:BindItem.FirstName  %>' MaxLength="20" runat="server"></asp:TextBox>
 
-    <%-- VALIDATION --%>
-    <%-- requiredfieldvalidator --%>
-    <%-- regularexpressionvalidator to prevent bad chars --%>
+            <%-- VALIDATION --%>
+            <%-- requiredfieldvalidator --%>
+            <%-- regularexpressionvalidator to prevent bad chars --%>
 
-    <p>Last name</p>
-    <asp:TextBox ID="LastNameTextBox" MaxLength="20" runat="server"></asp:TextBox>
+            <p>Last name</p>
+            <asp:TextBox ID="LastNameTextBox" Text='<%#:BindItem.LastName  %>' MaxLength="20" runat="server"></asp:TextBox>
 
-    <%-- VALIDATION --%>
-    <%-- requiredfieldvalidator --%>
-    <%-- regularexpressionvalidator to prevent bad chars --%>
+            <%-- VALIDATION --%>
+            <%-- requiredfieldvalidator --%>
+            <%-- regularexpressionvalidator to prevent bad chars --%>
 
-    <p>Company</p>
-    <asp:TextBox ID="CompanyTextBox" MaxLength="40" runat="server"></asp:TextBox>
+            <p>Company</p>
+            <asp:TextBox ID="CompanyTextBox" MaxLength="40" runat="server"></asp:TextBox>
 
-    <%-- VALIDATION --%>
-    <%-- requiredfieldvalidatior --%>
-    <%-- regularexpressionvalidator to prevent bad chars --%>
+            <%-- VALIDATION --%>
+            <%-- requiredfieldvalidatior --%>
+            <%-- regularexpressionvalidator to prevent bad chars --%>
 
 
-    <p>Convention date</p>
-    <asp:TextBox ID="DateTextBox" runat="server"></asp:TextBox>
-    <%-- requiredfieldvalidator --%>
-    <%-- regularexpressionvalidator to validate given date format --%>
+            <p>Convention date</p>
+            <asp:TextBox ID="DateTextBox" runat="server"></asp:TextBox>
+            <%-- requiredfieldvalidator --%>
+            <%-- regularexpressionvalidator to validate given date format --%>
 
-    <div class="formItems">
-        <asp:Button ID="UploadButton" runat="server" Text="UpLoad" OnClick="UploadButton_Click" />
-    </div>
+            <div class="formItems">
+                <asp:Button ID="UploadButton" runat="server" Text="UpLoad" CommandName="Insert" />
+            </div>
+        </InsertItemTemplate>
+    </asp:FormView>
+
 </asp:Content>
 
