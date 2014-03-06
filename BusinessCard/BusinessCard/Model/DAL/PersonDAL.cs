@@ -5,9 +5,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
+
 namespace BusinessCard.Model.DAL
 {
-    public class PersonDAL: DALBase
+    public class PersonDAL : DALBase
     {
         private SqlCommand _cmd;
 

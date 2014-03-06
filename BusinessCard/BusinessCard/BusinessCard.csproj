@@ -305,10 +305,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\Company.cs" />
-    <Compile Include="Model\DAL\CompanyDAL.cs" />
-    <Compile Include="Model\DAL\DALBase.cs" />
+    <Compile Include="Model\DAL\CompanyDAL.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Model\DAL\DALBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\DAL\EmploymentDAL.cs" />
-    <Compile Include="Model\DAL\PersonDAL.cs" />
+    <Compile Include="Model\DAL\PersonDAL.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\Employment.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Service.cs" />
