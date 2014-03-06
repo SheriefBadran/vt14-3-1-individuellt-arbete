@@ -65,7 +65,7 @@
         <asp:Button ID="FindButton" runat="server" Text="Find" OnClick="FindButton_Click" />
     </div>
 
-    <asp:FormView ID="BusinessCardFormView" runat="server"
+<%--    <asp:FormView ID="BusinessCardFormView" runat="server"
         ItemType="BusinessCard.Model.Person"
         SelectMethod="BusinessCardFormView_GetItem"
         UpdateMethod="BusinessCardFormView_UpdateItem"
@@ -80,15 +80,15 @@
                 <td>
                     <asp:Literal ID="LastNameLiteral" runat="server" Text='<%#: Item.LastName %>' />
                 </td>
-                <td class="command">
+                <td class="command">--%>
                         <%-- Command Buttons for update and delete --%>
                     <%--<asp:LinkButton ID="LinkButton1" runat="server" CommandName="Delete" Text="Ta bort" CausesValidation="false" 
                         OnClientClick='<%# String.Format("return confirm(\"Är du säker på att du vill ta bort kontakten {0} {1}?\")", Item.FirstName, Item.LastName) %>' />
                     <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />--%>
-                </td>
+<%--                </td>
             </tr>
         </ItemTemplate>
 
-    </asp:FormView>
+    </asp:FormView>--%>
 </asp:Content>
 

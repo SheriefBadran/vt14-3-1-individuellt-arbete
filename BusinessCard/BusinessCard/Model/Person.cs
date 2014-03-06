@@ -21,7 +21,6 @@ namespace BusinessCard.Model
         [StringLength(20)]
         public string LastName { get; set; }
 
-
         #endregion
     }
 }

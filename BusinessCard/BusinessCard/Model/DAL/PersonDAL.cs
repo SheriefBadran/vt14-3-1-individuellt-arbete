@@ -18,9 +18,51 @@ namespace BusinessCard.Model.DAL
 
         private const string USP_UPDATE_PERSON = "AppSchema.uspUpdatePerson";
         private const string USP_REMOVE_PERSON = "AppSchema.uspRemovePerson";
+        private const string USP_GET_PERSON_BY_NAME = "AppSchema.uspGetPersonByFirstName";
 
 
         // Methods
+        public Person GetPersonByName(string firstName)
+        {
+            try
+            {
+                using (var connection = CreateConnection())
+                {
+                    _cmd = new SqlCommand(USP_GET_PERSON_BY_NAME, connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameter id for stored procedure to return person
+                    _cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 20).Value = firstName;
+
+                    connection.Open();
+
+                    using (var reader = _cmd.ExecuteReader())
+                    {
+
+                        if (reader.Read())
+                        {
+                            int personIdIndex = reader.GetOrdinal("PersonID");
+                            int firstNameIndex = reader.GetOrdinal("FirstName");
+                            int lastNameIndex = reader.GetOrdinal("LastName");
+
+                            return new Person
+                            {
+                                PersonID = reader.GetInt32(personIdIndex),
+                                FirstName = reader.GetString(firstNameIndex),
+                                LastName = reader.GetString(lastNameIndex)
+                            };
+                        }
+                    }
+
+                    return null;
+                }
+            }
+            catch
+            {
+                throw new ApplicationException("An error occured in the data access layer");
+            }
+        }
+
         public void DeletePerson(int personID)
         {
             // Skapar och initierar ett anslutningsobjekt.

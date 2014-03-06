@@ -23,43 +23,42 @@ namespace BusinessCard.Pages.BC_Pages
 
         protected void FindButton_Click(object sender, EventArgs e)
         {
-            var FirstName = FirstNameTextBox.Text;
 
-
+            var person = Service.GetPersonByName(FirstNameTextBox.Text);
         }
 
         // The id parameter should match the DataKeyNames value set on the control
         // or be decorated with a value provider attribute, e.g. [QueryString]int id
-        public Person BusinessCardFormView_GetItem(int PersonID)
-        {
-            var person = Service.GetPerson(PersonID);
+        //public Person BusinessCardFormView_GetItem(int PersonID)
+        //{
+        //    var person = Service.GetPerson(PersonID);
 
-            return person;
-        }
+        //    return person;
+        //}
 
-        // The id parameter name should match the DataKeyNames value set on the control
-        public void BusinessCardFormView_UpdateItem(int id)
-        {
-            BusinessCard.Model.Person item = null;
-            // Load the item here, e.g. item = MyDataLayer.Find(id);
-            if (item == null)
-            {
-                // The item wasn't found
-                ModelState.AddModelError("", String.Format("Item with id {0} was not found", id));
-                return;
-            }
-            TryUpdateModel(item);
-            if (ModelState.IsValid)
-            {
-                // Save changes here, e.g. MyDataLayer.SaveChanges();
+        //// The id parameter name should match the DataKeyNames value set on the control
+        //public void BusinessCardFormView_UpdateItem(int id)
+        //{
+        //    BusinessCard.Model.Person item = null;
+        //    // Load the item here, e.g. item = MyDataLayer.Find(id);
+        //    if (item == null)
+        //    {
+        //        // The item wasn't found
+        //        ModelState.AddModelError("", String.Format("Item with id {0} was not found", id));
+        //        return;
+        //    }
+        //    TryUpdateModel(item);
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Save changes here, e.g. MyDataLayer.SaveChanges();
 
-            }
-        }
+        //    }
+        //}
 
-        // The id parameter name should match the DataKeyNames value set on the control
-        public void BusinessCardFormView_DeleteItem(int id)
-        {
+        //// The id parameter name should match the DataKeyNames value set on the control
+        //public void BusinessCardFormView_DeleteItem(int id)
+        //{
 
-        }
+        //}
     }
 }
