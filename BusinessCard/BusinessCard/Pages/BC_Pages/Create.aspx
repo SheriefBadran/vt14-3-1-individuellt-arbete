@@ -54,14 +54,6 @@
             <%-- requiredfieldvalidator --%>
             <%-- regularexpressionvalidator to prevent bad chars --%>
 
-            <p>Company</p>
-            <asp:TextBox ID="CompanyTextBox" MaxLength="40" runat="server"></asp:TextBox>
-
-            <%-- VALIDATION --%>
-            <%-- requiredfieldvalidatior --%>
-            <%-- regularexpressionvalidator to prevent bad chars --%>
-
-
             <p>Convention date</p>
             <asp:TextBox ID="DateTextBox" runat="server"></asp:TextBox>
             <%-- requiredfieldvalidator --%>
@@ -70,7 +62,33 @@
             <div class="formItems">
                 <asp:Button ID="UploadButton" runat="server" Text="UpLoad" CommandName="Insert" />
             </div>
+
+<%--            <asp:ListView ID="Employment" runat="server"
+                ItemType="BusinessCard.Model.Employment"
+                DataKeyNames="PersonID, EmploymentID, CompanyID"
+                OnItemDataBound="Employment_ItemDataBound">
+            </asp:ListView>
+            <asp:Button ID="Button1" runat="server" Text="test" CommandName="Insert" />--%>
         </InsertItemTemplate>
+    </asp:FormView>
+
+    <asp:FormView ID="InsertCompany" runat="server"
+        ItemType="BusinessCard.Model.Company"
+        DataKeyNames="CompanyID"
+        InsertMethod="InsertCompany_InsertItem"
+        DefaultMode="Insert">
+
+        <InsertItemTemplate>
+            <p>Company name</p>
+            <asp:TextBox ID="CompanyTextBox" Text='<%#:BindItem.CompanyName  %>' MaxLength="40" runat="server"></asp:TextBox>
+
+            <%-- VALIDATION --%>
+            <%-- requiredfieldvalidatior --%>
+            <%-- regularexpressionvalidator to prevent bad chars --%>
+
+            <asp:Button ID="test" runat="server" Text="UpLoad" CommandName="Insert" />
+        </InsertItemTemplate>
+        
     </asp:FormView>
 
 </asp:Content>

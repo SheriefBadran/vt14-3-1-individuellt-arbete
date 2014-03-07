@@ -11,6 +11,7 @@ namespace BusinessCard.Model
         // Private field
         private PersonDAL _personDal;
         private EmploymentDAL _employmentDal;
+        private CompanyDAL _company;
 
         // Properties
         private PersonDAL PersonDAL
@@ -23,6 +24,13 @@ namespace BusinessCard.Model
             get { return _employmentDal ?? (_employmentDal = new EmploymentDAL()); }
         }
 
+        private CompanyDAL CompanyDAL
+        {
+            get { return _company ?? (_company = new CompanyDAL()); }
+        }
+
+
+        // PERSON METHODS
         public Person GetPerson(int personID)
         {
             return PersonDAL.GetPersonById(personID);
@@ -33,11 +41,6 @@ namespace BusinessCard.Model
             return PersonDAL.GetPersonByName(firstName);
         }
 
-        public Employment GetGetCompanyIdByPersonId(int personID)
-        {
-            return PersonDAL.GetCompanyIdByPersonId(personID);
-        }
-
         public IEnumerable<Person> GetPersons()
         {
             return PersonDAL.GetPersons();
@@ -45,7 +48,7 @@ namespace BusinessCard.Model
 
         public void SavePerson(Person person)
         {
-            // TODO: Implement validation in Service Save method.
+            // TODO: Implement validation in Service SavePerson.
             //ICollection<ValidationResult> validationResults;
 
             //if (!person.Validate(out validationResults))
@@ -61,8 +64,41 @@ namespace BusinessCard.Model
             }
             else
             {
-               // TODO: Call UpdatePerson from Service -> Save()
-               // PersonDAL.UpdatePerson(person);
+                // TODO: Call UpdatePerson from Service -> SavePerson()
+                // PersonDAL.UpdatePerson(person);
+                throw new NotImplementedException();
+            }
+        }
+
+        // EMPLOYMENT METHODS
+        public Employment GetGetCompanyIdByPersonId(int personID)
+        {
+            return PersonDAL.GetCompanyIdByPersonId(personID);
+        }
+
+        public void SaveDate(Employment employment)
+        {
+            if (employment.EmploymentID == 0)
+            {
+                EmploymentDAL.CreateDate(employment);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        // COMPANY METHODS
+        public void SaveCompany(Company company)
+        {
+            // TODO: Implement validation in Service SaveCompany()
+            if (company.CompanyID == 0)
+            {
+                CompanyDAL.CreateCompany(company);
+            }
+            else
+            {
+                // TODO: Call UpdatePerson from Service -> SaveCompany()
                 throw new NotImplementedException();
             }
         }

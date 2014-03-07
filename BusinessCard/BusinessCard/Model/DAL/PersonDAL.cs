@@ -49,6 +49,7 @@ namespace BusinessCard.Model.DAL
                     // Get primary key value for the new table post and assign the Contact object the value.
                     person.PersonID = (int)_cmd.Parameters["@PersonID"].Value;
 
+
                 }
                 catch
                 {

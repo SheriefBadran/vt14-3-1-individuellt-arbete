@@ -311,7 +311,10 @@
     <Compile Include="Model\DAL\DALBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Model\DAL\EmploymentDAL.cs" />
+    <Compile Include="Model\DAL\DAL_Base.cs" />
+    <Compile Include="Model\DAL\EmploymentDAL.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\DAL\PersonDAL.cs">
       <SubType>Component</SubType>
     </Compile>

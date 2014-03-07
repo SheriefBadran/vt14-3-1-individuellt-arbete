@@ -28,7 +28,6 @@ namespace BusinessCard.Pages.BC_Pages
             try
             {
                 // TODO: Implement validation and PRG in Create.aspx.cs -> InsertPerson_InsertItem.
-
                 Service.SavePerson(person);
 
 
@@ -40,6 +39,30 @@ namespace BusinessCard.Pages.BC_Pages
                 ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då en visitkort skulle läggas till.");
             }
             //var item = new Person();
+            //TryUpdateModel(item);
+            //if (ModelState.IsValid)
+            //{
+            //    // Save changes here
+
+            //}
+        }
+
+        public void InsertCompany_InsertItem(Company company)
+        {
+            try
+            {
+                // TODO: Implement validation and PRG in Create.aspx.cs -> InsertPerson_InsertItem.
+                Service.SaveCompany(company);
+
+
+                // ResponseMessage = String.Format("Kontakten {0} {1} har sparats.", contact.FirstName, contact.LastName);
+                // Response.Redirect("~/Default.aspx");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då en visitkort skulle läggas till.");
+            }
+            //var item = new BusinessCard.Model.Company();
             //TryUpdateModel(item);
             //if (ModelState.IsValid)
             //{
