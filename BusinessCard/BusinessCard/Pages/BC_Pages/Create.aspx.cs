@@ -60,7 +60,7 @@ namespace BusinessCard.Pages.BC_Pages
             }
             catch (Exception)
             {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då en visitkort skulle läggas till.");
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då ett visitkort skulle läggas till.");
             }
             //var item = new BusinessCard.Model.Company();
             //TryUpdateModel(item);
