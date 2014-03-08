@@ -33,15 +33,15 @@
 <asp:Content runat="server" ID="CreateForm" ContentPlaceHolderID="FormContent">
     <h3>Go ahead and upload...</h3>
 
-    <asp:FormView ID="InsertPerson" runat="server" 
+    <asp:FormView ID="BusinessC" runat="server" 
         ItemType="BusinessCard.Model.Person"
-        InsertMethod="InsertPerson_InsertItem" 
+        InsertMethod="BusinessC_InsertItem"
         DataKeyNames="PersonID"
         DefaultMode="Insert">
 
         <InsertItemTemplate>
             <p>First name</p>
-            <asp:TextBox ID="FirstNameTextBox" Text='<%#:BindItem.FirstName  %>' MaxLength="20" runat="server"></asp:TextBox>
+            <asp:TextBox ID="FirstNameTextBox" Text='<%#:BindItem.FirstName %>' MaxLength="20" runat="server"></asp:TextBox>
 
             <%-- VALIDATION --%>
             <%-- requiredfieldvalidator --%>
@@ -55,8 +55,7 @@
             <%-- regularexpressionvalidator to prevent bad chars --%>
 
             <p>Company</p>
-            <asp:TextBox ID="CompanyTextBox" MaxLength="40" runat="server"></asp:TextBox>
-
+            <asp:DropDownList ID="DropDownList1" runat="server" OnDataBinding="DropDownList1_DataBinding" SelectMethod="CompanyDropDown_GetData" DataTextField="CompanyName" DataValueField="CompanyID"></asp:DropDownList>
             <%--Text='<%#:BindItem.CompanyName  %>'--%>
             <%-- VALIDATION --%>
             <%-- requiredfieldvalidatior --%>
@@ -64,7 +63,7 @@
 
 
             <p>Convention date</p>
-            <asp:TextBox ID="DateTextBox" runat="server"></asp:TextBox>
+            <%--<asp:TextBox ID="DateTextBox" Text='<%#:BindItem.ConvenDate  %>' runat="server"></asp:TextBox>--%>
             <%--Text='<%#:BindItem.ConvenDate  %>'--%>
             <%-- requiredfieldvalidator --%>
             <%-- regularexpressionvalidator to validate given date format --%>

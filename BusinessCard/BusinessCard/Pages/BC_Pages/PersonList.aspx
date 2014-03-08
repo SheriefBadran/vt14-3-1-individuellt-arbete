@@ -33,7 +33,8 @@
             SelectMethod="BusinessCardFormView_GetData"
             UpdateMethod="BusinessCardFormView_UpdateItem"
             DeleteMethod="BusinessCardFormView_DeleteItem"
-            DataKeyNames="PersonID">
+            DataKeyNames="PersonID"
+            ViewStateMode="Enabled">
                 <LayoutTemplate>
                     <table>
                         <tr>
@@ -62,7 +63,34 @@
                         <td>
                             <asp:Literal ID="LastNameLiteral" runat="server" Text='<%#: Item.LastName %>' />
                         </td>
+                        <td>
+
+                            <asp:Literal ID="CompanyNameLiteral" OnDataBinding="CompanyNameLiteral_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:Literal>
+                        </td>
+                        <td>
+                            <asp:LinkButton runat="server" CommandName="Delete" Text="Delete" CausesValidation="false" />
+                            <asp:LinkButton ID="LinkButton3" runat="server" CommandName="Edit" Text="Edit" CausesValidation="false" />
+                        </td>
                     </tr>
                 </ItemTemplate>
+
+                <EditItemTemplate>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="FirstNameTextBox" Text='<%#:BindItem.FirstName %>' MaxLength="20" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="LastNameTextBox" Text='<%#:BindItem.LastName  %>' MaxLength="20" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="DropDownListUpdate" runat="server" OnDataBinding="CompanyNameLiteral_DataBinding" DataTextField="CompanyName" DataValueField="CompanyID"></asp:DropDownList>
+                        </td>
+                        <td>
+                            <%-- Command Buttons for Update and Cancel - SET BUTTON VALIDATIONGROUP TO UPDATE --%>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Update" Text="Save" ValidationGroup="update" />
+                            <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Cancel" Text="Cancel" CausesValidation="false" />
+                        </td>
+                    </tr>
+                </EditItemTemplate>
     </asp:ListView>
 </asp:Content>

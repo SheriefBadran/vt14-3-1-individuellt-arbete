@@ -6,10 +6,17 @@ using System.Web;
 
 namespace BusinessCard.Model
 {
-    public class BusinessCard
+    public class BusinessC
     {
+
+        public Person Person { get; set; }
         #region Auto implemented properties for Person
 
+
+        public BusinessC()
+        {
+            Person = new Person();
+        }
         // ContactID is not set, ContactID has value 0. 0-value indicates insert new contact.
 
         [Required(ErrorMessage = "First name is required.")]

@@ -17,58 +17,51 @@ namespace BusinessCard.Pages.BC_Pages
             get { return _service ?? (_service = new Service()); }
         }
 
+        public DropDownList DropDown{ get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //var CompanyID = int.Parse(DropDown.SelectedValue);
         }
 
-
-        public void InsertPerson_InsertItem(Person person)
+        public void BusinessC_InsertItem(Person person)
         {
             try
             {
-                // TODO: Implement validation and PRG in Create.aspx.cs -> InsertPerson_InsertItem.
+                // Retrive the CompanyID selected from the dropdown list.
+                var CompanyID = int.Parse(DropDown.SelectedValue);
+
+                // Save persons name data into the Person DB-table
                 Service.SavePerson(person);
 
-
-                // ResponseMessage = String.Format("Kontakten {0} {1} har sparats.", contact.FirstName, contact.LastName);
-                // Response.Redirect("~/Default.aspx");
+                // Save the Persons Employment data into the Employment DB-relational-table.
+                Service.SaveEmployment(person.PersonID, CompanyID);
             }
             catch (Exception)
             {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då en visitkort skulle läggas till.");
+                throw;
             }
-            //var item = new Person();
-            //TryUpdateModel(item);
-            //if (ModelState.IsValid)
-            //{
-            //    // Save changes here
-
-            //}
         }
 
-        public void InsertCompany_InsertItem(Company company)
+        public IEnumerable<Company> CompanyDropDown_GetData()
         {
-            try
+            return Service.GetCompanies();
+        }
+
+        // retrieve the dropdown object and initialize it to the DropDown property in this class
+        protected void DropDownList1_DataBinding(object sender, EventArgs e)
+        {
+            var dropDown = sender as DropDownList;
+
+            if (dropDown != null)
             {
-                // TODO: Implement validation and PRG in Create.aspx.cs -> InsertPerson_InsertItem.
-                Service.SaveCompany(company);
-
-
-                // ResponseMessage = String.Format("Kontakten {0} {1} har sparats.", contact.FirstName, contact.LastName);
-                // Response.Redirect("~/Default.aspx");
+                DropDown = dropDown;
             }
-            catch (Exception)
+            else
             {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då ett visitkort skulle läggas till.");
+                // TODO: Implement correct exception handling on Create.aspx.cs -> DropDownList DataBinding
+                throw new NotImplementedException();
             }
-            //var item = new BusinessCard.Model.Company();
-            //TryUpdateModel(item);
-            //if (ModelState.IsValid)
-            //{
-            //    // Save changes here
-
-            //}
         }
     }
 }

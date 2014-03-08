@@ -26,7 +26,7 @@ namespace BusinessCard.Pages.BC_Pages
             if (IsValid)
             {
                 var person = Service.GetPersonByName(FirstNameTextBox.Text);
-                var companyID = Service.GetGetCompanyIdByPersonId(person.PersonID);
+                var companyID = Service.GetCompanyIdByPersonId(person.PersonID);
             }         
         }
 

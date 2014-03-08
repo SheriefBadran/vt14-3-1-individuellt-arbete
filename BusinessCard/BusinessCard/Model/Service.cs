@@ -65,15 +65,14 @@ namespace BusinessCard.Model
             else
             {
                 // TODO: Call UpdatePerson from Service -> SavePerson()
-                // PersonDAL.UpdatePerson(person);
-                throw new NotImplementedException();
+                PersonDAL.UpdatePerson(person);
             }
         }
 
         // EMPLOYMENT METHODS
-        public Employment GetGetCompanyIdByPersonId(int personID)
+        public Company GetCompanyIdByPersonId(int personID)
         {
-            return PersonDAL.GetCompanyIdByPersonId(personID);
+            return CompanyDAL.GetCompanyNameByPersonId(personID);
         }
 
         public void SaveDate(Employment employment)
@@ -86,6 +85,11 @@ namespace BusinessCard.Model
             {
                 throw new NotImplementedException();
             }
+        }
+
+        public void SaveEmployment(int PersonID, int CompanyID)
+        {
+            EmploymentDAL.CreateEmployment(PersonID, CompanyID);
         }
 
         // COMPANY METHODS
@@ -101,6 +105,11 @@ namespace BusinessCard.Model
                 // TODO: Call UpdatePerson from Service -> SaveCompany()
                 throw new NotImplementedException();
             }
+        }
+
+        public IEnumerable<Company> GetCompanies()
+        {
+            return CompanyDAL.GetCompanies();
         }
     }
 }

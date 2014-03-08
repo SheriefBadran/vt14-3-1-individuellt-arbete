@@ -113,52 +113,6 @@ namespace BusinessCard.Model.DAL
         }
         #endregion
 
-        #region GetCompanyIdByPersonId(int personID)
-        public Employment GetCompanyIdByPersonId(int personID)
-        {
-            try
-            {
-                using (var connection = CreateConnection())
-                {
-                    _cmd = new SqlCommand(USP_GET_PERSON_BY_NAME, connection);
-                    _cmd.CommandType = CommandType.StoredProcedure;
-
-                    // Add parameter id for stored procedure to return person
-                    _cmd.Parameters.Add("@PersonID", SqlDbType.Int, 4).Value = personID;
-
-                    connection.Open();
-
-                    using (var reader = _cmd.ExecuteReader())
-                    {
-
-                        if (reader.Read())
-                        {
-                            int companyIdIndex = reader.GetOrdinal("CompanyID");
-                            int employmentIdIndex = reader.GetOrdinal("EmploymentID");
-                            int convenDateIndex = reader.GetOrdinal("ConvenDate");
-                            int industryIdIndex = reader.GetOrdinal("IndustryID");
-                            int personIdIndex = reader.GetOrdinal("PersonID");
-
-                            return new Employment
-                            {
-                                // Sproc doesn't return PersonID
-                                CompanyID = reader.GetInt32(companyIdIndex),
-                                EmploymentID = reader.GetInt32(employmentIdIndex),
-                                ConvenDate = reader.GetDateTime(convenDateIndex),
-                                PersonID = personID
-                            };
-                        }
-                    }
-                    return null;
-                }
-            }
-            catch
-            {
-                throw new ApplicationException("An error occured in the data access layer");
-            }
-        }
-        #endregion
-
         #region GetPersonByName(string firstName)
         public Person GetPersonByName(string firstName)
         {
@@ -230,7 +184,7 @@ namespace BusinessCard.Model.DAL
         }
         #endregion
 
-        #region DeletePersonById(int personID)
+        #region GetPersonById(int personID)
         public Person GetPersonById(int personID)
         {
             // Create SqlCommand object to execute stored procedure.

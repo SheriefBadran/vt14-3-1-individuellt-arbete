@@ -304,7 +304,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model\BusinessCard.cs" />
+    <Compile Include="Model\BusinessC.cs" />
     <Compile Include="Model\Company.cs" />
     <Compile Include="Model\DAL\CompanyDAL.cs">
       <SubType>Component</SubType>
