@@ -21,7 +21,7 @@
             <asp:HyperLink runat="server" Text="Upload business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
         </li>
         <li>
-            <asp:HyperLink runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardUpdate %>" />
+            <asp:HyperLink runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardFind %>" />
         </li>
         <li>            
             <asp:HyperLink ID="HyperLink3" runat="server" Text="List all business cards" NavigateUrl="<%$ RouteUrl:routename=BusinessCardList %>" />
@@ -55,7 +55,12 @@
             <%-- regularexpressionvalidator to prevent bad chars --%>
 
             <p>Company</p>
-            <asp:DropDownList ID="DropDownList1" runat="server" OnDataBinding="DropDownList1_DataBinding" SelectMethod="CompanyDropDown_GetData" DataTextField="CompanyName" DataValueField="CompanyID"></asp:DropDownList>
+            <asp:DropDownList ID="DropDownList1" runat="server" OnDataBinding="DropDownList1_DataBinding" SelectMethod="CompanyDropDown_GetData" DataTextField="CompanyName" DataValueField="CompanyID">
+                <asp:ListItem Text="Select from already existing companies" Value="-1" Selected="True"></asp:ListItem>
+            </asp:DropDownList>
+
+            <asp:CheckBoxList ID="CompanyCheckBoxList" runat="server" OnDataBinding="CompanyCheckBoxList_DataBinding" SelectMethod="CompanyCheckBox_GetData" DataTextField="CompanyName" DataValueField="CompanyID" RepeatColumns="3" RepeatDirection="Vertical" RepeatLayout="Table" TextAlign="Left"></asp:CheckBoxList>
+
             <%--Text='<%#:BindItem.CompanyName  %>'--%>
             <%-- VALIDATION --%>
             <%-- requiredfieldvalidatior --%>

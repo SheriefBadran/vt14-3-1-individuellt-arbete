@@ -19,23 +19,35 @@ namespace BusinessCard.Pages.BC_Pages
 
         public DropDownList DropDown{ get; set; }
 
+        public CheckBoxList CheckBoxes { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //var CompanyID = int.Parse(DropDown.SelectedValue);
         }
 
         public void BusinessC_InsertItem(Person person)
         {
             try
             {
-                // Retrive the CompanyID selected from the dropdown list.
-                var CompanyID = int.Parse(DropDown.SelectedValue);
+                // Retrieve the id's from the companies selected in the company checkboxlist.
+                int[] CompanyIDs = new int[3];
+                CompanyIDs = CheckBoxes.Items.Cast<ListItem>()
+                    .Where(li => li.Selected)
+                    .Select(li => int.Parse(li.Value))
+                    .ToArray();
+
+                // Retrive the CompanyID selected from the dropdown list. OLD CODE!!!!
+                //var CompanyID = int.Parse(DropDown.SelectedValue);
 
                 // Save persons name data into the Person DB-table
                 Service.SavePerson(person);
 
-                // Save the Persons Employment data into the Employment DB-relational-table.
-                Service.SaveEmployment(person.PersonID, CompanyID);
+                Service.SaveEmployments(person.PersonID, CompanyIDs);
+
+                //// Save the Persons Employment data into the Employment DB-relational-table.
+                //Service.SaveEmployment(person.PersonID, CompanyID);
+
+                
             }
             catch (Exception)
             {
@@ -44,6 +56,11 @@ namespace BusinessCard.Pages.BC_Pages
         }
 
         public IEnumerable<Company> CompanyDropDown_GetData()
+        {
+            return Service.GetCompanies();
+        }
+
+        public IEnumerable<Company> CompanyCheckBox_GetData()
         {
             return Service.GetCompanies();
         }
@@ -60,6 +77,19 @@ namespace BusinessCard.Pages.BC_Pages
             else
             {
                 // TODO: Implement correct exception handling on Create.aspx.cs -> DropDownList DataBinding
+                throw new NotImplementedException();
+            }
+        }
+
+        protected void CompanyCheckBoxList_DataBinding(object sender, EventArgs e)
+        {
+            var checkBoxes = sender as CheckBoxList;
+            if (checkBoxes != null)
+            {
+                CheckBoxes = checkBoxes;
+            }
+            else
+            {
                 throw new NotImplementedException();
             }
         }

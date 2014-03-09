@@ -17,6 +17,8 @@ namespace BusinessCard.Pages.BC_Pages
             get { return _service ?? (_service = new Service()); }
         }
 
+        public TextBox CompanyUpdateTextBox { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -53,7 +55,7 @@ namespace BusinessCard.Pages.BC_Pages
                 var PersonID = int.Parse(literal.Text);
 
                 // Retrieve a company object reference containing CompanyID and CompanyName
-                var company = Service.GetCompanyIdByPersonId(PersonID);
+                var company = Service.GetCompanyByPersonId(PersonID);
                 if (company != null)
                 {
                     
@@ -62,6 +64,30 @@ namespace BusinessCard.Pages.BC_Pages
                 else
                 {
                     literal.Text = "***No registered employment***";
+                }
+                //literal.Text = text + "edit";
+            }
+        }
+
+        // Retrieve CompanyName for each person and add to the view list.
+        protected void CompanyNameTextBox_DataBinding(object sender, EventArgs e)
+        {
+            var CompanyUpdateTextBox = sender as TextBox;
+            if (CompanyUpdateTextBox != null)
+            {
+                // Retrieve the binded PersonID from the CompanyNameLiteral
+                var PersonID = int.Parse(CompanyUpdateTextBox.Text);
+
+                // Retrieve a company object reference containing CompanyID and CompanyName
+                var company = Service.GetCompanyByPersonId(PersonID);
+                if (company != null)
+                {
+
+                    CompanyUpdateTextBox.Text = company.CompanyName;
+                }
+                else
+                {
+                    CompanyUpdateTextBox.Text = "***No registered employment***";
                 }
                 //literal.Text = text + "edit";
             }
@@ -76,6 +102,7 @@ namespace BusinessCard.Pages.BC_Pages
 
                 // 2. Retrieve contact from DB to make sure that there is a contact to update on given ContactID.
                 var person = Service.GetPerson(PersonID);
+                var company = Service.GetCompanyByPersonId(PersonID);
 
                 // 3. Check if we got the requested Contact object.
                 if (person == null)
@@ -83,6 +110,7 @@ namespace BusinessCard.Pages.BC_Pages
                     ModelState.AddModelError(String.Empty, "Kontakten kunde inte hittas.");
                     return;
                 }
+                
 
                 // 4. A Contact reference object is created in GetContactById() in ContactDAL class. The Contact object is populated
                 // with updated data.
@@ -97,10 +125,15 @@ namespace BusinessCard.Pages.BC_Pages
                     //Response.Redirect("~/Default.aspx", false);
                     //Context.ApplicationInstance.CompleteRequest();
                 }
+
+                if (TryUpdateModel(company))
+                {
+                    CompanyUpdateTextBox.Text = company.CompanyName;
+                }
             }
             catch (Exception)
             {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då kunduppgiften skulle uppdateras.");
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då visitkortet skulle uppdateras.");
             }
         }
     }

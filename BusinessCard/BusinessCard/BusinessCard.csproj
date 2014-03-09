@@ -207,6 +207,7 @@
     <Content Include="Pages\BC_Pages\Create.aspx" />
     <Content Include="Pages\BC_Pages\PersonList.aspx" />
     <Content Include="Pages\BC_Pages\Start.aspx" />
+    <Content Include="Pages\BC_Pages\Find.aspx" />
     <Content Include="Pages\BC_Pages\Update.aspx" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -342,6 +343,13 @@
     </Compile>
     <Compile Include="Pages\BC_Pages\Start.aspx.designer.cs">
       <DependentUpon>Start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BC_Pages\Find.aspx.cs">
+      <DependentUpon>Find.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BC_Pages\Find.aspx.designer.cs">
+      <DependentUpon>Find.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\BC_Pages\Update.aspx.cs">
       <DependentUpon>Update.aspx</DependentUpon>

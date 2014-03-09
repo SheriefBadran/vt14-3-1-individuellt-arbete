@@ -21,7 +21,7 @@
             <asp:HyperLink ID="HyperLink1" runat="server" Text="Upload business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
         </li>
         <li>
-            <asp:HyperLink ID="HyperLink2" runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardUpdate %>" />
+            <asp:HyperLink ID="HyperLink2" runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardFind %>" />
         </li>
         <li>            
             <asp:HyperLink ID="HyperLink3" runat="server" Text="List all business cards" NavigateUrl="<%$ RouteUrl:routename=BusinessCardList %>" />
@@ -68,6 +68,7 @@
                             <asp:Literal ID="CompanyNameLiteral" OnDataBinding="CompanyNameLiteral_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:Literal>
                         </td>
                         <td>
+                            <%--<asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl='<%# GetRouteUrl("BusinessCardUpdate", new { id = Item.PersonID })  %>' Text="Update name" />--%>
                             <asp:LinkButton runat="server" CommandName="Delete" Text="Delete" CausesValidation="false" />
                             <asp:LinkButton ID="LinkButton3" runat="server" CommandName="Edit" Text="Edit" CausesValidation="false" />
                         </td>
@@ -83,10 +84,13 @@
                             <asp:TextBox ID="LastNameTextBox" Text='<%#:BindItem.LastName  %>' MaxLength="20" runat="server"></asp:TextBox>
                         </td>
                         <td>
-                            <asp:DropDownList ID="DropDownListUpdate" runat="server" OnDataBinding="CompanyNameLiteral_DataBinding" DataTextField="CompanyName" DataValueField="CompanyID"></asp:DropDownList>
+                            <%--<asp:DropDownList ID="DropDownListUpdate" runat="server" OnDataBinding="CompanyNameLiteral_DataBinding" DataTextField="CompanyName" DataValueField="CompanyID"></asp:DropDownList>--%>
+                            <asp:TextBox ID="CompanyNameTextBox" OnDataBinding="CompanyNameTextBox_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:TextBox>
+                            
                         </td>
                         <td>
                             <%-- Command Buttons for Update and Cancel - SET BUTTON VALIDATIONGROUP TO UPDATE --%>
+                            <%--<asp:HyperLink ID="HyperLink4" runat="server">HyperLink</asp:HyperLink>--%>
                             <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Update" Text="Save" ValidationGroup="update" />
                             <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Cancel" Text="Cancel" CausesValidation="false" />
                         </td>

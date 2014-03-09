@@ -70,7 +70,7 @@ namespace BusinessCard.Model
         }
 
         // EMPLOYMENT METHODS
-        public Company GetCompanyIdByPersonId(int personID)
+        public Company GetCompanyByPersonId(int personID)
         {
             return CompanyDAL.GetCompanyNameByPersonId(personID);
         }
@@ -90,6 +90,11 @@ namespace BusinessCard.Model
         public void SaveEmployment(int PersonID, int CompanyID)
         {
             EmploymentDAL.CreateEmployment(PersonID, CompanyID);
+        }
+
+        public void SaveEmployments(int PersonID, int[] CompanyIDs)
+        {
+            EmploymentDAL.CreateEmployments(PersonID, CompanyIDs);
         }
 
         // COMPANY METHODS
