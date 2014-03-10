@@ -250,6 +250,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Infrastructure\PageExtensions.cs" />
+    <Compile Include="App_Infrastructure\ValidationExtensions.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -305,7 +307,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model\BusinessC.cs" />
     <Compile Include="Model\Company.cs" />
     <Compile Include="Model\DAL\CompanyDAL.cs">
       <SubType>Component</SubType>
@@ -381,9 +382,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />

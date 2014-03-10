@@ -28,6 +28,10 @@
         </li>
     </ul>
 
+    <asp:Panel ID="ResponsePanel" CssClass="confirmSuccess" runat="server" Visible="false">
+        <p><asp:Literal ID="LiteralSuccess" runat="server" /></p>
+    </asp:Panel>
+
     <asp:ListView ID="BusinessCardFormView" runat="server"
             ItemType="BusinessCard.Model.Person"
             SelectMethod="BusinessCardFormView_GetData"
@@ -64,12 +68,12 @@
                             <asp:Literal ID="LastNameLiteral" runat="server" Text='<%#: Item.LastName %>' />
                         </td>
                         <td>
-
                             <asp:Literal ID="CompanyNameLiteral" OnDataBinding="CompanyNameLiteral_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:Literal>
                         </td>
                         <td>
                             <%--<asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl='<%# GetRouteUrl("BusinessCardUpdate", new { id = Item.PersonID })  %>' Text="Update name" />--%>
-                            <asp:LinkButton runat="server" CommandName="Delete" Text="Delete" CausesValidation="false" />
+                            <asp:LinkButton runat="server" CommandName="Delete" Text="Delete" CausesValidation="false" 
+                                OnClientClick='<%# String.Format("return confirm(\"Delete {0} {1}?\")", Item.FirstName, Item.LastName) %>'/>
                             <asp:LinkButton ID="LinkButton3" runat="server" CommandName="Edit" Text="Edit" CausesValidation="false" />
                         </td>
                     </tr>

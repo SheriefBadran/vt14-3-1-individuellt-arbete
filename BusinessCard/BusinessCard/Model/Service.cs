@@ -31,6 +31,7 @@ namespace BusinessCard.Model
 
 
         // PERSON METHODS
+        // METHOD USED!!
         public Person GetPerson(int personID)
         {
             return PersonDAL.GetPersonById(personID);
@@ -41,11 +42,13 @@ namespace BusinessCard.Model
             return PersonDAL.GetPersonByName(firstName);
         }
 
+        // METHOD USED!!
         public IEnumerable<Person> GetPersons()
         {
             return PersonDAL.GetPersons();
         }
 
+        // METHOD USED
         public void SavePerson(Person person)
         {
             // TODO: Implement validation in Service SavePerson.
@@ -70,6 +73,7 @@ namespace BusinessCard.Model
         }
 
         // EMPLOYMENT METHODS
+        // METHOD USED
         public Company GetCompanyByPersonId(int personID)
         {
             return CompanyDAL.GetCompanyNameByPersonId(personID);
@@ -87,14 +91,22 @@ namespace BusinessCard.Model
             }
         }
 
+        // NOT USED!!
         public void SaveEmployment(int PersonID, int CompanyID)
         {
             EmploymentDAL.CreateEmployment(PersonID, CompanyID);
         }
 
+        // USED METHOD!!
         public void SaveEmployments(int PersonID, int[] CompanyIDs)
         {
             EmploymentDAL.CreateEmployments(PersonID, CompanyIDs);
+        }
+
+        // USED METHOD
+        public void DeletePersonEmployment(int PersonID)
+        {
+            EmploymentDAL.DeletePersonEmployment(PersonID);
         }
 
         // COMPANY METHODS
@@ -112,6 +124,7 @@ namespace BusinessCard.Model
             }
         }
 
+        // METHOD USED
         public IEnumerable<Company> GetCompanies()
         {
             return CompanyDAL.GetCompanies();

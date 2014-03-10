@@ -16,7 +16,7 @@ namespace BusinessCard.Model
         public int CompanyID { get; set; }
 
         [Required(ErrorMessage = "Company name is required.")]
-        [StringLength(40)]
+        [StringLength(40, ErrorMessage = "Company name can contain maximum be 40 letters.")]
         public string CompanyName { get; set; }
 
         #endregion

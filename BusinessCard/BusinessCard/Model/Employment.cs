@@ -18,6 +18,8 @@ namespace BusinessCard.Model
 
         public int PersonID { get; set; }
 
+        // Maybe a temporary solution to handle ConvenDate.
+        // TODO: Implement functionality for ConvenDate insert if there is time overleft.
         public Employment()
         {
             ConvenDate = DateTime.Today;

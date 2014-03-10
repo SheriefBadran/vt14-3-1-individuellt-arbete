@@ -33,6 +33,12 @@
 <asp:Content runat="server" ID="CreateForm" ContentPlaceHolderID="FormContent">
     <h3>Go ahead and upload...</h3>
 
+    <asp:Panel ID="ResponsePanel" CssClass="confirmSuccess" runat="server" Visible="false">
+        <p><asp:Literal ID="LiteralSuccess" runat="server" /></p>
+    </asp:Panel>
+
+    <asp:ValidationSummary ID="ValidationSummary1" HeaderText="Error!" DisplayMode="BulletList" runat="server" />
+
     <asp:FormView ID="BusinessC" runat="server" 
         ItemType="BusinessCard.Model.Person"
         InsertMethod="BusinessC_InsertItem"
@@ -55,10 +61,6 @@
             <%-- regularexpressionvalidator to prevent bad chars --%>
 
             <p>Company</p>
-            <asp:DropDownList ID="DropDownList1" runat="server" OnDataBinding="DropDownList1_DataBinding" SelectMethod="CompanyDropDown_GetData" DataTextField="CompanyName" DataValueField="CompanyID">
-                <asp:ListItem Text="Select from already existing companies" Value="-1" Selected="True"></asp:ListItem>
-            </asp:DropDownList>
-
             <asp:CheckBoxList ID="CompanyCheckBoxList" runat="server" OnDataBinding="CompanyCheckBoxList_DataBinding" SelectMethod="CompanyCheckBox_GetData" DataTextField="CompanyName" DataValueField="CompanyID" RepeatColumns="3" RepeatDirection="Vertical" RepeatLayout="Table" TextAlign="Left"></asp:CheckBoxList>
 
             <%--Text='<%#:BindItem.CompanyName  %>'--%>

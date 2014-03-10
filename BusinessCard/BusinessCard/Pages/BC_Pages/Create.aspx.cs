@@ -5,53 +5,74 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessCard.App_Infrastructure;
 
 namespace BusinessCard.Pages.BC_Pages
 {
     public partial class Create : System.Web.UI.Page
     {
+        // Private field.
         private Service _service;
 
+        // Private property.
         private Service Service
         {
             get { return _service ?? (_service = new Service()); }
         }
 
+        // Public properties for holding data from data-binding methods.
         public DropDownList DropDown{ get; set; }
 
         public CheckBoxList CheckBoxes { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Empty
         }
 
+
+        // Insert data to Person and Employment DB-tables.
         public void BusinessC_InsertItem(Person person)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // Retrieve the id's from the companies selected in the company checkboxlist.
-                int[] CompanyIDs = new int[3];
-                CompanyIDs = CheckBoxes.Items.Cast<ListItem>()
-                    .Where(li => li.Selected)
-                    .Select(li => int.Parse(li.Value))
-                    .ToArray();
+                try
+                {
+                    // Retrieve the id's from the companies selected in the company checkboxlist.
+                    int[] CompanyIDs = new int[3];
+                    CompanyIDs = CheckBoxes.Items.Cast<ListItem>()
+                        .Where(li => li.Selected)
+                        .Select(li => int.Parse(li.Value))
+                        .ToArray();
 
-                // Retrive the CompanyID selected from the dropdown list. OLD CODE!!!!
-                //var CompanyID = int.Parse(DropDown.SelectedValue);
+                    // Check that no more than three companies is chosen for each business card.
+                    if (CompanyIDs.Length <= 3)
+                    {
+                        // Save persons name data into the Person DB-table
+                        Service.SavePerson(person);
 
-                // Save persons name data into the Person DB-table
-                Service.SavePerson(person);
+                        // Only save employment if employment exists!
+                        if (CompanyIDs.Length > 0)
+                        {
+                            // Save minimum one employment and maximum three employments.
+                            Service.SaveEmployments(person.PersonID, CompanyIDs); 
+                        }
 
-                Service.SaveEmployments(person.PersonID, CompanyIDs);
-
-                //// Save the Persons Employment data into the Employment DB-relational-table.
-                //Service.SaveEmployment(person.PersonID, CompanyID);
-
-                
-            }
-            catch (Exception)
-            {
-                throw;
+                        // Set Successmessage in temporary session. Done with static class method App_Infrastructure->PageExtensions.cs
+                        // Also redirect to PersonList.aspx (PRG pattern).
+                        Page.SetTempData("SuccessMessage", String.Format("Saving {0} {1} succeeded!", person.FirstName, person.LastName));
+                        Response.RedirectToRoute("BusinessCardList");
+                        Context.ApplicationInstance.CompleteRequest();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(String.Empty, "Error! Maximum three companies can be selected on one business card.");
+                    }
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError(String.Empty, "Unexpected error! Upload business card failed!");
+                } 
             }
         }
 
@@ -65,22 +86,6 @@ namespace BusinessCard.Pages.BC_Pages
             return Service.GetCompanies();
         }
 
-        // retrieve the dropdown object and initialize it to the DropDown property in this class
-        protected void DropDownList1_DataBinding(object sender, EventArgs e)
-        {
-            var dropDown = sender as DropDownList;
-
-            if (dropDown != null)
-            {
-                DropDown = dropDown;
-            }
-            else
-            {
-                // TODO: Implement correct exception handling on Create.aspx.cs -> DropDownList DataBinding
-                throw new NotImplementedException();
-            }
-        }
-
         protected void CompanyCheckBoxList_DataBinding(object sender, EventArgs e)
         {
             var checkBoxes = sender as CheckBoxList;
@@ -90,7 +95,7 @@ namespace BusinessCard.Pages.BC_Pages
             }
             else
             {
-                throw new NotImplementedException();
+                ModelState.AddModelError(String.Empty, "Unexpected error! Company selection failed!");
             }
         }
     }

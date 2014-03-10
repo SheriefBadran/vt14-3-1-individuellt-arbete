@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessCard.App_Infrastructure;
 
 namespace BusinessCard.Pages.BC_Pages
 {
@@ -21,26 +22,18 @@ namespace BusinessCard.Pages.BC_Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Success message handling
+            LiteralSuccess.Text = Page.GetTempData("SuccessMessage") as string;
 
+            // Set visible to true if LiteralSuccess.Text contains a string.
+            ResponsePanel.Visible = !String.IsNullOrWhiteSpace(LiteralSuccess.Text);
         }
 
-        // The return type can be changed to IEnumerable, however to support
-        // paging and sorting, the following parameters must be added:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
         public IEnumerable<Person> BusinessCardFormView_GetData()
         {
             return Service.GetPersons();
         }
 
-        // The return type can be changed to IEnumerable, however to support
-        // paging and sorting, the following parameters must be added:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
         public IEnumerable<Company> CompanyNameListView_GetData()
         {
             return Service.GetCompanies();
@@ -89,7 +82,6 @@ namespace BusinessCard.Pages.BC_Pages
                 {
                     CompanyUpdateTextBox.Text = "***No registered employment***";
                 }
-                //literal.Text = text + "edit";
             }
         }
 
@@ -98,16 +90,17 @@ namespace BusinessCard.Pages.BC_Pages
         {
             try
             {
-                // 1. ContactID retrieved from form after DataKeyNames is set to ContactID in the ListView control.
+                // 1. PersonID retrieved from form after DataKeyNames is set to PersonID in the ListView control.
 
-                // 2. Retrieve contact from DB to make sure that there is a contact to update on given ContactID.
+                // 2. Retrieve person from DB to make sure that there is a person to update on given PersonID.
+                // And the same is done for company.
                 var person = Service.GetPerson(PersonID);
                 var company = Service.GetCompanyByPersonId(PersonID);
 
                 // 3. Check if we got the requested Contact object.
                 if (person == null)
                 {
-                    ModelState.AddModelError(String.Empty, "Kontakten kunde inte hittas.");
+                    ModelState.AddModelError(String.Empty, "The name related to the business card was not found!");
                     return;
                 }
                 
@@ -122,8 +115,12 @@ namespace BusinessCard.Pages.BC_Pages
                 {
                     // 6. When Service.Save(contact), the data is sent to database.
                     Service.SavePerson(person);
-                    //Response.Redirect("~/Default.aspx", false);
-                    //Context.ApplicationInstance.CompleteRequest();
+
+                    // Set Successmessage in temporary session. Done with static class method App_Infrastructure->PageExtensions.cs
+                    // Also redirect to (this page) PersonList.aspx. (PRG pattern)
+                    Page.SetTempData("SuccessMessage", "Name was successfully updated.");
+                    Response.RedirectToRoute("BusinessCardList");
+                    Context.ApplicationInstance.CompleteRequest();
                 }
 
                 if (TryUpdateModel(company))
@@ -134,6 +131,25 @@ namespace BusinessCard.Pages.BC_Pages
             catch (Exception)
             {
                 ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då visitkortet skulle uppdateras.");
+            }
+        }
+
+        // The id parameter name should match the DataKeyNames value set on the control
+        public void BusinessCardFormView_DeleteItem(int PersonID)
+        {
+            try
+            {
+                Service.DeletePersonEmployment(PersonID);
+
+                // Set Successmessage in temporary session. Done with static class method App_Infrastructure->PageExtensions.cs
+                // Also redirect to (this page) PersonList.aspx. (PRG pattern)
+                Page.SetTempData("SuccessMessage", "The business card was successfully deleted.");
+                Response.RedirectToRoute("BusinessCardList");
+                Context.ApplicationInstance.CompleteRequest();
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade då kunduppgiften skulle tas bort.");
             }
         }
     }

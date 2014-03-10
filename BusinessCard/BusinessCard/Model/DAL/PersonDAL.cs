@@ -22,7 +22,9 @@ namespace BusinessCard.Model.DAL
         private const string USP_GET_PERSON_BY_NAME = "AppSchema.uspGetPersonByFirstName";
 
 
-        // Methods
+        // Person Methods
+
+        // METHOD USED!!
         #region CreatePerson()
         public void CreatePerson(Person person)
         {
@@ -59,6 +61,7 @@ namespace BusinessCard.Model.DAL
         }
         #endregion
 
+        // METHOD USED
         #region GetPersons()
         public IEnumerable<Person> GetPersons()
         {
@@ -184,6 +187,7 @@ namespace BusinessCard.Model.DAL
         }
         #endregion
 
+        // METHOD USED!!
         #region GetPersonById(int personID)
         public Person GetPersonById(int personID)
         {
@@ -263,6 +267,7 @@ namespace BusinessCard.Model.DAL
         }
         #endregion
 
+        // Method Used!!
         #region UpdatePerson(Person person)
         public void UpdatePerson(Person person)
         {

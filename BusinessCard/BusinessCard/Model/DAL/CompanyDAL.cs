@@ -73,6 +73,7 @@ namespace BusinessCard.Model.DAL
         }
         #endregion
 
+        // METHOD USED
         #region GetCompanies()
         public IEnumerable<Company> GetCompanies()
         {
@@ -125,6 +126,7 @@ namespace BusinessCard.Model.DAL
         }
         #endregion
 
+        // METHOD USED
         #region GetCompanyNameByPersonId(int personID)
         public Company GetCompanyNameByPersonId(int personID)
         {

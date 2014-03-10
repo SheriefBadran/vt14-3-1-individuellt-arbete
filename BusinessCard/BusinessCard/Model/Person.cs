@@ -14,11 +14,11 @@ namespace BusinessCard.Model
         public int PersonID { get; set; }
 
         [Required(ErrorMessage = "First name is required.")]
-        [StringLength(20)]
+        [StringLength(20, ErrorMessage = "First name can contain maximum 20 letters.")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is required")]
-        [StringLength(20)]
+        [StringLength(20, ErrorMessage = "Last name can contain maximum 20 letters.")]
         public string LastName { get; set; }
 
         #endregion
