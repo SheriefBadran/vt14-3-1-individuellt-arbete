@@ -37,11 +37,6 @@ namespace BusinessCard.Model
             return PersonDAL.GetPersonById(personID);
         }
 
-        public Person GetPersonByName(string firstName)
-        {
-            return PersonDAL.GetPersonByName(firstName);
-        }
-
         // METHOD USED!!
         public IEnumerable<Person> GetPersons()
         {
@@ -73,30 +68,6 @@ namespace BusinessCard.Model
         }
 
         // EMPLOYMENT METHODS
-        // METHOD USED
-        public Company GetCompanyByPersonId(int personID)
-        {
-            return CompanyDAL.GetCompanyNameByPersonId(personID);
-        }
-
-        public void SaveDate(Employment employment)
-        {
-            if (employment.EmploymentID == 0)
-            {
-                EmploymentDAL.CreateDate(employment);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        // NOT USED!!
-        public void SaveEmployment(int PersonID, int CompanyID)
-        {
-            EmploymentDAL.CreateEmployment(PersonID, CompanyID);
-        }
-
         // USED METHOD!!
         public void SaveEmployments(int PersonID, int[] CompanyIDs)
         {
@@ -110,24 +81,17 @@ namespace BusinessCard.Model
         }
 
         // COMPANY METHODS
-        public void SaveCompany(Company company)
-        {
-            // TODO: Implement validation in Service SaveCompany()
-            if (company.CompanyID == 0)
-            {
-                CompanyDAL.CreateCompany(company);
-            }
-            else
-            {
-                // TODO: Call UpdatePerson from Service -> SaveCompany()
-                throw new NotImplementedException();
-            }
-        }
 
         // METHOD USED
         public IEnumerable<Company> GetCompanies()
         {
             return CompanyDAL.GetCompanies();
+        }
+
+        // METHOD USED
+        public Company GetCompanyByPersonId(int personID)
+        {
+            return CompanyDAL.GetCompanyNameByPersonId(personID);
         }
     }
 }
