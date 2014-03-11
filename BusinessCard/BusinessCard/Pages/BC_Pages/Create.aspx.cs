@@ -45,18 +45,23 @@ namespace BusinessCard.Pages.BC_Pages
                         .Select(li => int.Parse(li.Value))
                         .ToArray();
 
+                    Employment employment = new Employment();
+                    employment.CompanyIDs = CompanyIDs;
+
                     // Check that no more than three companies is chosen for each business card.
                     if (CompanyIDs.Length <= 3)
                     {
+                        Service.SavePersonEmployments(person, employment);
+
                         // Save persons name data into the Person DB-table
-                        Service.SavePerson(person);
+                        //Service.SavePerson(PersonID, CompanyIDs);
 
                         // Only save employment if employment exists!
-                        if (CompanyIDs.Length > 0)
-                        {
-                            // Save minimum one employment and maximum three employments.
-                            Service.SaveEmployments(person.PersonID, CompanyIDs); 
-                        }
+                        //if (CompanyIDs.Length > 0)
+                        //{
+                        //    // Save minimum one employment and maximum three employments.
+                        //    Service.SaveEmployments(person.PersonID, CompanyIDs); 
+                        //}
 
                         // Set Successmessage in temporary session. Done with static class method App_Infrastructure->PageExtensions.cs
                         // Also redirect to PersonList.aspx (PRG pattern).

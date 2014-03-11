@@ -1,6 +1,7 @@
 ﻿using BusinessCard.Model.DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -29,6 +30,18 @@ namespace BusinessCard.Model
             get { return _company ?? (_company = new CompanyDAL()); }
         }
 
+        // VALIDATION METHOD
+        private void Validate(object instance)
+        {
+            ICollection<ValidationResult> validationResults;
+
+            if (!instance.Validate(out validationResults))
+            {
+                var ex = new ValidationException("The object failed validation!");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
+        }
 
         // PERSON METHODS
         // METHOD USED!!
@@ -46,15 +59,7 @@ namespace BusinessCard.Model
         // METHOD USED
         public void SavePerson(Person person)
         {
-            // TODO: Implement validation in Service SavePerson.
-            //ICollection<ValidationResult> validationResults;
-
-            //if (!person.Validate(out validationResults))
-            //{
-            //    var ex = new ValidationException("Objektet klarade inte valideringen.");
-            //    ex.Data.Add("ValidationResults", validationResults);
-            //    throw ex;
-            //}
+            Validate(person);
 
             if (person.PersonID == 0) // New post if ContactID is 0
             {
@@ -68,10 +73,19 @@ namespace BusinessCard.Model
         }
 
         // EMPLOYMENT METHODS
-        // USED METHOD!!
+        // USED METHOD!! - MAYBE NOT USED
         public void SaveEmployments(int PersonID, int[] CompanyIDs)
         {
             EmploymentDAL.CreateEmployments(PersonID, CompanyIDs);
+        }
+
+        // USED METHOD!
+        public void SavePersonEmployments(Person person, Employment employment)
+        {
+            Validate(person);
+            Validate(employment);
+
+            EmploymentDAL.CreateBusinessCard(person, employment);
         }
 
         // USED METHOD
@@ -89,9 +103,9 @@ namespace BusinessCard.Model
         }
 
         // METHOD USED
-        public Company GetCompanyByPersonId(int personID)
+        public List<Company> GetCompaniesByPersonID(int personID)
         {
-            return CompanyDAL.GetCompanyNameByPersonId(personID);
+            return CompanyDAL.GetCompanyNamesByPersonId(personID);
         }
     }
 }

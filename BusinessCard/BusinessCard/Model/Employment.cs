@@ -10,7 +10,7 @@ namespace BusinessCard.Model
         #region Auto implemented properties
         //TODO: Implement validation for Employment table class
 
-        public int CompanyID { get; set;}
+        public int[] CompanyIDs { get; set;}
 
         public int EmploymentID { get; set; }
 

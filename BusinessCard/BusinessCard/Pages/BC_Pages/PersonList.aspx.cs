@@ -48,40 +48,38 @@ namespace BusinessCard.Pages.BC_Pages
                 var PersonID = int.Parse(literal.Text);
 
                 // Retrieve a company object reference containing CompanyID and CompanyName
-                var company = Service.GetCompanyByPersonId(PersonID);
-                if (company != null)
+                var companies = Service.GetCompaniesByPersonID(PersonID);
+                var companyNames = companies.Select(c => c.CompanyName).ToArray();
+                if (companies != null && companies.Count > 0)
                 {
-                    
-                    literal.Text = company.CompanyName;
+                    int count = 0;
+                    do
+                    {
+                        if (count == 0 && companyNames.Length == 1)
+                        {
+                            literal.Text = String.Format("{0}", companyNames[count]);
+                        }
+                        else if (count == 0)
+                        {
+                            literal.Text = String.Format("{0} | ", companyNames[count]);
+                        }
+                        else if (count < companyNames.Length - 1)
+                        {
+                            literal.Text += String.Format("{0} | ", companyNames[count]);
+                        }
+                        else if (count == companyNames.Length - 1)
+                        {
+                            literal.Text += String.Format("{0}", companyNames[count]);
+                        }
+
+                        count++;
+                    } while (count < companyNames.Length); 
                 }
                 else
                 {
                     literal.Text = "***No registered employment***";
                 }
                 //literal.Text = text + "edit";
-            }
-        }
-
-        // Retrieve CompanyName for each person and add to the view list.
-        protected void CompanyNameTextBox_DataBinding(object sender, EventArgs e)
-        {
-            var CompanyUpdateTextBox = sender as TextBox;
-            if (CompanyUpdateTextBox != null)
-            {
-                // Retrieve the binded PersonID from the CompanyNameLiteral
-                var PersonID = int.Parse(CompanyUpdateTextBox.Text);
-
-                // Retrieve a company object reference containing CompanyID and CompanyName
-                var company = Service.GetCompanyByPersonId(PersonID);
-                if (company != null)
-                {
-
-                    CompanyUpdateTextBox.Text = company.CompanyName;
-                }
-                else
-                {
-                    CompanyUpdateTextBox.Text = "***No registered employment***";
-                }
             }
         }
 
@@ -93,9 +91,7 @@ namespace BusinessCard.Pages.BC_Pages
                 // 1. PersonID retrieved from form after DataKeyNames is set to PersonID in the ListView control.
 
                 // 2. Retrieve person from DB to make sure that there is a person to update on given PersonID.
-                // And the same is done for company.
                 var person = Service.GetPerson(PersonID);
-                var company = Service.GetCompanyByPersonId(PersonID);
 
                 // 3. Check if we got the requested Contact object.
                 if (person == null)
@@ -103,7 +99,6 @@ namespace BusinessCard.Pages.BC_Pages
                     ModelState.AddModelError(String.Empty, "The name related to the business card was not found!");
                     return;
                 }
-                
 
                 // 4. A Contact reference object is created in GetContactById() in ContactDAL class. The Contact object is populated
                 // with updated data.
@@ -121,11 +116,6 @@ namespace BusinessCard.Pages.BC_Pages
                     Page.SetTempData("SuccessMessage", "Name was successfully updated.");
                     Response.RedirectToRoute("BusinessCardList");
                     Context.ApplicationInstance.CompleteRequest();
-                }
-
-                if (TryUpdateModel(company))
-                {
-                    CompanyUpdateTextBox.Text = company.CompanyName;
                 }
             }
             catch (Exception)

@@ -13,7 +13,7 @@ namespace BusinessCard.Model.DAL
     {
         private SqlCommand _cmd;
         private const string USP_GET_COMPANIES = "AppSchema.uspGetCompanies";
-        private const string USP_GET_COMPANY_NAME_BY_PERSONID = "AppSchema.GetCompanyNameByPersonID";
+        private const string USP_GET_COMPANY_NAMES_BY_PERSONID = "AppSchema.GetCompanyNamesByPersonID";
 
         [WebMethod]
         public List<string> GetCompanyNames(string companyName)
@@ -92,14 +92,16 @@ namespace BusinessCard.Model.DAL
         #endregion
 
         // METHOD USED
-        #region GetCompanyNameByPersonId(int personID)
-        public Company GetCompanyNameByPersonId(int personID)
+        #region GetCompanyNamesByPersonId(int personID)
+        public List<Company> GetCompanyNamesByPersonId(int personID)
         {
             try
             {
                 using (var connection = CreateConnection())
                 {
-                    _cmd = new SqlCommand(USP_GET_COMPANY_NAME_BY_PERSONID, connection);
+                    var companies = new List<Company>(3);
+
+                    _cmd = new SqlCommand(USP_GET_COMPANY_NAMES_BY_PERSONID, connection);
                     _cmd.CommandType = CommandType.StoredProcedure;
 
                     // Add parameter id for stored procedure to return person
@@ -110,20 +112,20 @@ namespace BusinessCard.Model.DAL
                     using (var reader = _cmd.ExecuteReader())
                     {
 
-                        if (reader.Read())
+                        while (reader.Read())
                         {
                             int companyIdIndex = reader.GetOrdinal("CompanyID");
                             int companyNameIndex = reader.GetOrdinal("CompanyName");
 
-                            return new Company
+                            companies.Add(new Company
                             {
                                 // Sproc doesn't return PersonID
                                 CompanyID = reader.GetInt32(companyIdIndex),
                                 CompanyName= reader.GetString(companyNameIndex),
-                            };
+                            });
                         }
                     }
-                    return null;
+                    return companies;
                 }
             }
             catch

@@ -89,7 +89,8 @@
                         </td>
                         <td>
                             <%--<asp:DropDownList ID="DropDownListUpdate" runat="server" OnDataBinding="CompanyNameLiteral_DataBinding" DataTextField="CompanyName" DataValueField="CompanyID"></asp:DropDownList>--%>
-                            <asp:TextBox ID="CompanyNameTextBox" OnDataBinding="CompanyNameTextBox_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:TextBox>
+                            <%--<asp:TextBox ID="CompanyNameTextBox" OnDataBinding="CompanyNameTextBox_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:TextBox>--%>
+                            <asp:Literal ID="CompanyNameLiteral" OnDataBinding="CompanyNameLiteral_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:Literal>
                             
                         </td>
                         <td>
