@@ -18,7 +18,7 @@
             <asp:HyperLink runat="server" Text="Upload business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
         </li>
         <li>
-            <asp:HyperLink runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardFind %>" />
+            <asp:HyperLink runat="server" Text="Search business card on company" NavigateUrl="<%$ RouteUrl:routename=SearchBusinessCardByCompany %>" />
         </li>
         <li>            
             <asp:HyperLink runat="server" Text="View All" NavigateUrl="<%$ RouteUrl:routename=BusinessCardList %>" />

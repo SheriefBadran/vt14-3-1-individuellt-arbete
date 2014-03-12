@@ -53,16 +53,6 @@ namespace BusinessCard.Pages.BC_Pages
                     {
                         Service.SavePersonEmployments(person, employment);
 
-                        // Save persons name data into the Person DB-table
-                        //Service.SavePerson(PersonID, CompanyIDs);
-
-                        // Only save employment if employment exists!
-                        //if (CompanyIDs.Length > 0)
-                        //{
-                        //    // Save minimum one employment and maximum three employments.
-                        //    Service.SaveEmployments(person.PersonID, CompanyIDs); 
-                        //}
-
                         // Set Successmessage in temporary session. Done with static class method App_Infrastructure->PageExtensions.cs
                         // Also redirect to PersonList.aspx (PRG pattern).
                         Page.SetTempData("SuccessMessage", String.Format("Saving {0} {1} succeeded!", person.FirstName, person.LastName));

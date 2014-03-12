@@ -12,7 +12,7 @@ namespace BusinessCard
         {
             //routes.EnableFriendlyUrls();
             routes.MapPageRoute("BusinessCardCreate", "BusinessCard/Upload", "~/Pages/BC_Pages/Create.aspx");
-            routes.MapPageRoute("BusinessCardFind", "BusinessCard/Find", "~/Pages/BC_Pages/Find.aspx");
+            routes.MapPageRoute("SearchBusinessCardByCompany", "BusinessCard/SearchBusinessCardByCompany", "~/Pages/BC_Pages/Search.aspx");
             routes.MapPageRoute("RootDefault", "", "~/Pages/BC_Pages/Start.aspx");
             routes.MapPageRoute("Default", "BusinessCard/Start", "~/Pages/BC_Pages/Start.aspx");
             routes.MapPageRoute("BusinessCardList", "BusinessCard/ListAll", "~/Pages/BC_Pages/PersonList.aspx");

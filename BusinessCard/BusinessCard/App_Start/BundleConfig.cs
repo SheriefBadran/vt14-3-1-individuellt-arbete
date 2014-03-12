@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Optimization;
+using System.Web.UI;
 
 namespace BusinessCard
 {
@@ -11,6 +12,14 @@ namespace BusinessCard
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254726
         public static void RegisterBundles(BundleCollection bundles)
         {
+            ScriptManager.ScriptResourceMapping.AddDefinition("app", new ScriptResourceDefinition
+            {
+                Path = "~/Scripts/app.js"
+            });
+
+            bundles.Add(new ScriptBundle("~/bundles/app.js").Include(
+                  "~/Scripts/app.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/WebFormsJs").Include(
                   "~/Scripts/WebForms/WebForms.js",
                   "~/Scripts/WebForms/WebUIValidation.js",

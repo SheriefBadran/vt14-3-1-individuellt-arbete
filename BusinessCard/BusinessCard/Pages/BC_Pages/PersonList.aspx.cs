@@ -61,15 +61,15 @@ namespace BusinessCard.Pages.BC_Pages
                         }
                         else if (count == 0)
                         {
-                            literal.Text = String.Format("{0} | ", companyNames[count]);
+                            literal.Text = String.Format("| {0} |", companyNames[count]);
                         }
                         else if (count < companyNames.Length - 1)
                         {
-                            literal.Text += String.Format("{0} | ", companyNames[count]);
+                            literal.Text += String.Format(" {0} |", companyNames[count]);
                         }
                         else if (count == companyNames.Length - 1)
                         {
-                            literal.Text += String.Format("{0}", companyNames[count]);
+                            literal.Text += String.Format(" {0} |", companyNames[count]);
                         }
 
                         count++;

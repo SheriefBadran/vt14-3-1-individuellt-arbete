@@ -107,5 +107,10 @@ namespace BusinessCard.Model
         {
             return CompanyDAL.GetCompanyNamesByPersonId(personID);
         }
+
+        public List<string> GetCompanyNames(string companyNameFrag)
+        {
+            return CompanyDAL.GetCompanyNames(companyNameFrag);
+        }
     }
 }

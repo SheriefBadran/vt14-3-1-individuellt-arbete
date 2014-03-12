@@ -31,11 +31,10 @@ namespace BusinessCard.Model.DAL
                 SqlDataReader reader = _cmd.ExecuteReader();
                 while(reader.Read())
                 {
-                    
+                    companyNames.Add(reader["Name"].ToString());
                 }
             }
-            
-            throw new NotImplementedException();
+            return companyNames;
         }
 
         // METHOD USED
@@ -121,7 +120,7 @@ namespace BusinessCard.Model.DAL
                             {
                                 // Sproc doesn't return PersonID
                                 CompanyID = reader.GetInt32(companyIdIndex),
-                                CompanyName= reader.GetString(companyNameIndex),
+                                CompanyName = reader.GetString(companyNameIndex),
                             });
                         }
                     }

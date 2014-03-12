@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,7 @@ namespace BusinessCard.Model
         #region Auto implemented properties
         //TODO: Implement validation for Employment table class
 
-        public int[] CompanyIDs { get; set;}
+        public int[] CompanyIDs { get; set; }
 
         public int EmploymentID { get; set; }
 

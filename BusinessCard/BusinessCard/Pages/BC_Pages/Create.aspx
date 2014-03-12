@@ -21,7 +21,7 @@
             <asp:HyperLink runat="server" Text="Upload business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
         </li>
         <li>
-            <asp:HyperLink runat="server" Text="Find business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardFind %>" />
+            <asp:HyperLink runat="server" Text="Search business card on company" NavigateUrl="<%$ RouteUrl:routename=SearchBusinessCardByCompany %>" />
         </li>
         <li>            
             <asp:HyperLink ID="HyperLink3" runat="server" Text="List all business cards" NavigateUrl="<%$ RouteUrl:routename=BusinessCardList %>" />
@@ -70,6 +70,7 @@
 
 
             <p>Convention date</p>
+
             <%--<asp:TextBox ID="DateTextBox" Text='<%#:BindItem.ConvenDate  %>' runat="server"></asp:TextBox>--%>
             <%--Text='<%#:BindItem.ConvenDate  %>'--%>
             <%-- requiredfieldvalidator --%>
