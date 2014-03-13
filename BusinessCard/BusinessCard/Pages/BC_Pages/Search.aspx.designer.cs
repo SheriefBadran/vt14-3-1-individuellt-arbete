@@ -40,12 +40,21 @@ namespace BusinessCard.Pages.BC_Pages {
         protected global::System.Web.UI.WebControls.HyperLink HyperLink3;
         
         /// <summary>
-        /// BusinessCardSerchForm control.
+        /// CompanyNameTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView BusinessCardSerchForm;
+        protected global::System.Web.UI.WebControls.TextBox CompanyNameTextBox;
+        
+        /// <summary>
+        /// FindButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button FindButton;
     }
 }

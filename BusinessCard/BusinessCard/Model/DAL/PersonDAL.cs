@@ -17,7 +17,7 @@ namespace BusinessCard.Model.DAL
         private const string USP_GET_PERSONS = "AppSchema.uspGetPersons";
         private const string USP_UPDATE_PERSON = "AppSchema.uspUpdatePerson";
         private const string USP_ADD_PERSON = "AppSchema.uspAddPerson";
-
+        private const string GET_PERSONS_BY_COMPANY_ID = "AppSchema.uspGetPersonsByCompanyID";
         // Person Methods
 
         // METHOD USED!!
@@ -111,6 +111,49 @@ namespace BusinessCard.Model.DAL
             }            
         }
         #endregion
+
+        // METHOD USED!!
+        public List<Person> GetBusinessCardsByCompanyID(int CompanyID)
+        {
+            try
+            {
+                using (var connection = CreateConnection())
+                {
+                    var persons = new List<Person>(50);
+
+                    _cmd = new SqlCommand(GET_PERSONS_BY_COMPANY_ID, connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameter id for stored procedure to return person
+                    _cmd.Parameters.Add("@CompanyID", SqlDbType.Int, 4).Value = CompanyID;
+
+                    connection.Open();
+
+                    using (var reader = _cmd.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            int personIdIndex = reader.GetOrdinal("PersonID");
+                            int firstNameIndex = reader.GetOrdinal("FirstName");
+                            int lastNameIndex = reader.GetOrdinal("LastName");
+
+                            persons.Add(new Person
+                            {
+                                PersonID = reader.GetInt32(personIdIndex),
+                                FirstName = reader.GetString(firstNameIndex),
+                                LastName = reader.GetString(lastNameIndex)
+                            });
+                        }
+                    }
+                    return persons;
+                }
+            }
+            catch
+            {
+                throw new ApplicationException("An error occured in the data access layer");
+            }
+        }
 
         // METHOD USED!!
         #region GetPersonById(int personID)

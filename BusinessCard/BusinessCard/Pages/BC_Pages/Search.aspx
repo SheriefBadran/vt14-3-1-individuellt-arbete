@@ -33,29 +33,21 @@
 <asp:Content runat="server" ID="SearchForm" ContentPlaceHolderID="FormContent">
 
     <h3>Search a business card...</h3>
+    
+    <p>Company</p>
+    <asp:TextBox ID="CompanyNameTextBox"  MaxLength="20" runat="server" ClientIDMode="Static"></asp:TextBox>
 
-    <asp:FormView ID="BusinessCardSerchForm" runat="server" 
-        ItemType="BusinessCard.Model.Company"
-        DataKeyNames="CompanyID"
-        DefaultMode="Insert">
 
-        <InsertItemTemplate>       
-
-            <p>Company</p>
-            <asp:TextBox ID="CompanyNameTextBox"  MaxLength="20" runat="server" ClientIDMode="Static"></asp:TextBox>
-
-            <%--Text='<%#:BindItem.CompanyName  %>'--%>
-            <%-- VALIDATION --%>
-            <%-- requiredfieldvalidatior --%>
-            <%-- regularexpressionvalidator to prevent bad chars --%>
+    <%--Text='<%#:BindItem.CompanyName  %>'--%>
+    <%-- VALIDATION --%>
+    <%-- requiredfieldvalidatior --%>
+    <%-- regularexpressionvalidator to prevent bad chars --%>
 
 
 
-            <div class="formItems">
-                <asp:Button ID="FindButton" runat="server" Text="Find" />
-            </div>
+    <div class="formItems">
+        <asp:Button ID="FindButton" runat="server" OnClick="FindButton_Click" Text="Find" />
+    </div>
 
-        </InsertItemTemplate>
-    </asp:FormView>
 </asp:Content>
 

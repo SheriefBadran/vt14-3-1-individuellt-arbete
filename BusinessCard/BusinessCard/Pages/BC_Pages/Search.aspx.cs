@@ -21,5 +21,23 @@ namespace BusinessCard.Pages.BC_Pages
         {
             
         }
+
+        protected void FindButton_Click(object sender, EventArgs e)
+        {
+            var companyName =  CompanyNameTextBox.Text;
+            var companyID = Service.GetCompanyIDByCompanyName(companyName);
+
+            if (companyID != 0)
+            {
+                var businessCards = Service.GetBusinessCardsByCompanyID(companyID);
+
+                // Print out on listview!
+            }
+            else
+            {
+                ModelState.AddModelError(String.Empty, "Company does not exist!");
+            }
+
+        }
     }
 }

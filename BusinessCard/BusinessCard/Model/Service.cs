@@ -108,9 +108,16 @@ namespace BusinessCard.Model
             return CompanyDAL.GetCompanyNamesByPersonId(personID);
         }
 
-        public List<string> GetCompanyNames(string companyNameFrag)
+        //METHOD USED
+        public int GetCompanyIDByCompanyName(string companyName)
         {
-            return CompanyDAL.GetCompanyNames(companyNameFrag);
+            return CompanyDAL.GetCompanyIDByCompanyName(companyName);
+        }
+
+        // METHOD USED
+        public List<Person> GetBusinessCardsByCompanyID(int CompanyID)
+        {
+            return PersonDAL.GetBusinessCardsByCompanyID(CompanyID);
         }
     }
 }

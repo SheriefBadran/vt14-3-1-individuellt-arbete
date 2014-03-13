@@ -14,28 +14,7 @@ namespace BusinessCard.Model.DAL
         private SqlCommand _cmd;
         private const string USP_GET_COMPANIES = "AppSchema.uspGetCompanies";
         private const string USP_GET_COMPANY_NAMES_BY_PERSONID = "AppSchema.GetCompanyNamesByPersonID";
-
-        [WebMethod]
-        public List<string> GetCompanyNames(string companyName)
-        {
-            List<string> companyNames = new List<string>();
-            using (var connection = CreateConnection())
-            {
-                _cmd = new SqlCommand("uspGetMatchingCompanyNames", connection);
-                _cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter param = new SqlParameter("@CompanyName", companyName);
-                _cmd.Parameters.Add(param);
-
-                connection.Open();
-                SqlDataReader reader = _cmd.ExecuteReader();
-                while(reader.Read())
-                {
-                    companyNames.Add(reader["Name"].ToString());
-                }
-            }
-            return companyNames;
-        }
+        private const string USP_GET_COMPANY_ID_BY_COMPANY_NAME = "AppSchema.uspGetCompanyIDByCompanyName";
 
         // METHOD USED
         #region GetCompanies()
@@ -125,6 +104,42 @@ namespace BusinessCard.Model.DAL
                         }
                     }
                     return companies;
+                }
+            }
+            catch
+            {
+                throw new ApplicationException("An error occured in the data access layer");
+            }
+        }
+        #endregion
+
+        #region GetCompanyIDByCompanyName()
+        public int GetCompanyIDByCompanyName(string companyName)
+        {
+            try
+            {
+                using (var connection = CreateConnection())
+                {
+                    
+                    _cmd = new SqlCommand(USP_GET_COMPANY_ID_BY_COMPANY_NAME, connection);
+                    _cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameter CompanyName for stored procedure to return CompanyID
+                    _cmd.Parameters.Add("@CompanyName", SqlDbType.VarChar, 20).Value = companyName;
+
+                    connection.Open();
+
+                    using (var reader = _cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int companyIDIndex = reader.GetOrdinal("CompanyID");
+                            return reader.GetInt32(companyIDIndex);
+                        }
+                    }
+
+                    // If given CompanyName doesn't match with existing company names in DB, return CompanyID = 0;
+                    return 0;
                 }
             }
             catch
