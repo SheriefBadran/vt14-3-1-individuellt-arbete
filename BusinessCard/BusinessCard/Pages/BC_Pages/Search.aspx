@@ -35,19 +35,45 @@
     <h3>Search a business card...</h3>
     
     <p>Company</p>
-    <asp:TextBox ID="CompanyNameTextBox"  MaxLength="20" runat="server" ClientIDMode="Static"></asp:TextBox>
-
-
-    <%--Text='<%#:BindItem.CompanyName  %>'--%>
-    <%-- VALIDATION --%>
-    <%-- requiredfieldvalidatior --%>
-    <%-- regularexpressionvalidator to prevent bad chars --%>
-
-
+    <asp:TextBox ID="CompanyNameTextBox"  MaxLength="40" Columns="40" runat="server" ClientIDMode="Static"></asp:TextBox>
 
     <div class="formItems">
         <asp:Button ID="FindButton" runat="server" OnClick="FindButton_Click" Text="Find" />
     </div>
+
+    <asp:ListView ID="BusinessCardList" runat="server"
+        ItemType="BusinessCard.Model.Person"
+        DataKeyNames="PersonID"
+        SelectMethod="BusinessCardList_GetData">
+
+                <LayoutTemplate>
+                    <table>
+                        <tr>
+                            <th>
+                                Förnamn
+                            </th>
+                            <th>
+                                Efternamn
+                            </th>
+                        </tr>
+
+                        <%-- ROWS PLACEHOLDER --%>
+                        <asp:PlaceHolder ID="itemPlaceHolder" runat="server"></asp:PlaceHolder>
+                    </table>
+                </LayoutTemplate>
+
+                <%-- ROW TEMPLATE --%>
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <asp:Literal ID="FirstNameLiteral" runat="server" Text='<%#: Item.FirstName %>' />
+                        </td>
+                        <td>
+                            <asp:Literal ID="LastNameLiteral" runat="server" Text='<%#: Item.LastName %>' />
+                        </td>
+                </ItemTemplate>
+
+    </asp:ListView>
 
 </asp:Content>
 

@@ -17,6 +17,8 @@ namespace BusinessCard.Pages.BC_Pages
             get { return _service ?? (_service = new Service()); }
         }
 
+        List<Person> BusinessCards = new List<Person>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -29,15 +31,25 @@ namespace BusinessCard.Pages.BC_Pages
 
             if (companyID != 0)
             {
-                var businessCards = Service.GetBusinessCardsByCompanyID(companyID);
-
+                BusinessCards = Service.GetBusinessCardsByCompanyID(companyID);
                 // Print out on listview!
             }
+
             else
             {
                 ModelState.AddModelError(String.Empty, "Company does not exist!");
             }
+        }
 
+        // The return type can be changed to IEnumerable, however to support
+        // paging and sorting, the following parameters must be added:
+        //     int maximumRows
+        //     int startRowIndex
+        //     out int totalRowCount
+        //     string sortByExpression
+        public List<Person> BusinessCardList_GetData()
+        {
+            return BusinessCards;
         }
     }
 }
