@@ -34,7 +34,7 @@
 
     <h3>Search a business card...</h3>
     
-    <p>Company</p>
+    <p><b>on company name</b></p>
     <asp:TextBox ID="CompanyNameTextBox"  MaxLength="40" Columns="40" runat="server" ClientIDMode="Static"></asp:TextBox>
 
     <div class="formItems">

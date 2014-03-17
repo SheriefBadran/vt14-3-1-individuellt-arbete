@@ -16,45 +16,45 @@ namespace BusinessCard.Model.DAL
         private const string USP_GET_PERSON = "AppSchema.uspGetPerson";
         private const string USP_GET_PERSONS = "AppSchema.uspGetPersons";
         private const string USP_UPDATE_PERSON = "AppSchema.uspUpdatePerson";
-        private const string USP_ADD_PERSON = "AppSchema.uspAddPerson";
+        //private const string USP_ADD_PERSON = "AppSchema.uspAddPerson";
         private const string GET_PERSONS_BY_COMPANY_ID = "AppSchema.uspGetPersonsByCompanyID";
         // Person Methods
 
         // METHOD USED!!
         #region CreatePerson()
-        public void CreatePerson(Person person)
-        {
-            using (var connection = CreateConnection())
-            {
-                try
-                {
-                    _cmd = new SqlCommand(USP_ADD_PERSON, connection);
-                    _cmd.CommandType = CommandType.StoredProcedure;
+        //public void CreatePerson(Person person)
+        //{
+        //    using (var connection = CreateConnection())
+        //    {
+        //        try
+        //        {
+        //            _cmd = new SqlCommand(USP_ADD_PERSON, connection);
+        //            _cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Add the parameters to feed the stored procedure. 
-                    _cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 20).Value = person.FirstName;
-                    _cmd.Parameters.Add("@LastName", SqlDbType.VarChar, 20).Value = person.LastName;
+        //            // Add the parameters to feed the stored procedure. 
+        //            _cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 20).Value = person.FirstName;
+        //            _cmd.Parameters.Add("@LastName", SqlDbType.VarChar, 20).Value = person.LastName;
 
-                    // Parameter to get the primary key value. Value is set after the stored procedure is executed.
-                    _cmd.Parameters.Add("@PersonID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+        //            // Parameter to get the primary key value. Value is set after the stored procedure is executed.
+        //            _cmd.Parameters.Add("@PersonID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
 
-                    // Open database connection
-                    connection.Open();
+        //            // Open database connection
+        //            connection.Open();
 
-                    // The stored procedure with (INSERT) does not return any posts -> ExecuteNonQuery is used to execute the stored procedure.
-                    _cmd.ExecuteNonQuery();
+        //            // The stored procedure with (INSERT) does not return any posts -> ExecuteNonQuery is used to execute the stored procedure.
+        //            _cmd.ExecuteNonQuery();
 
-                    // Get primary key value for the new table post and assign the Contact object the value.
-                    person.PersonID = (int)_cmd.Parameters["@PersonID"].Value;
+        //            // Get primary key value for the new table post and assign the Contact object the value.
+        //            person.PersonID = (int)_cmd.Parameters["@PersonID"].Value;
 
 
-                }
-                catch
-                {
-                    throw new ApplicationException("An error occured in the data access layer.");
-                }
-            }
-        }
+        //        }
+        //        catch
+        //        {
+        //            throw new ApplicationException("An error occured in the data access layer.");
+        //        }
+        //    }
+        //}
         #endregion
 
         // METHOD USED

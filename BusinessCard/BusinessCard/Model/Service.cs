@@ -63,7 +63,7 @@ namespace BusinessCard.Model
 
             if (person.PersonID == 0) // New post if ContactID is 0
             {
-                PersonDAL.CreatePerson(person);
+                //PersonDAL.CreatePerson(person);
             }
             else
             {
@@ -76,7 +76,7 @@ namespace BusinessCard.Model
         // USED METHOD!! - MAYBE NOT USED
         public void SaveEmployments(int PersonID, int[] CompanyIDs)
         {
-            EmploymentDAL.CreateEmployments(PersonID, CompanyIDs);
+            //EmploymentDAL.CreateEmployments(PersonID, CompanyIDs);
         }
 
         // USED METHOD!
