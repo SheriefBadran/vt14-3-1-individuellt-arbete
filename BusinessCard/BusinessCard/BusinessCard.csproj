@@ -204,6 +204,7 @@
     <Content Include="Global.asax" />
     <Content Include="Model\DAL\CompanySearch.asmx" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\sb222rf.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Pages\BC_Pages\Create.aspx" />
     <Content Include="Pages\BC_Pages\PersonList.aspx" />

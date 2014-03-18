@@ -108,8 +108,8 @@ namespace BusinessCard.Pages.BC_Pages
                 // If that is done with success, go on save the contact else Print error message with ModelState error!
                 if (TryUpdateModel(person))
                 {
-                    // 6. When Service.Save(contact), the data is sent to database.
-                    Service.SavePerson(person);
+                    // 6. When Service.UpdatePerson(contact), the data is sent to database.
+                    Service.UpdatePerson(person);
 
                     // Set Successmessage in temporary session. Done with static class method App_Infrastructure->PageExtensions.cs
                     // Also redirect to (this page) PersonList.aspx. (PRG pattern)

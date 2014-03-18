@@ -37,7 +37,7 @@
         <p><asp:Literal ID="LiteralSuccess" runat="server" /></p>
     </asp:Panel>
 
-    <asp:ValidationSummary ID="ValidationSummary1" HeaderText="Error!" DisplayMode="BulletList" runat="server" />
+    <asp:ValidationSummary HeaderText="Error!" DisplayMode="BulletList" runat="server" />
 
     <asp:FormView ID="BusinessC" runat="server" 
         ItemType="BusinessCard.Model.Person"
@@ -49,36 +49,20 @@
             <p>First name</p>
             <asp:TextBox ID="FirstNameTextBox" Text='<%#:BindItem.FirstName %>' MaxLength="20" runat="server"></asp:TextBox>
 
-            <%-- VALIDATION --%>
-            <%-- requiredfieldvalidator --%>
-            <%-- regularexpressionvalidator to prevent bad chars --%>
-
             <p>Last name</p>
             <asp:TextBox ID="LastNameTextBox" Text='<%#:BindItem.LastName  %>' MaxLength="20" runat="server"></asp:TextBox>
 
-            <%-- VALIDATION --%>
-            <%-- requiredfieldvalidator --%>
-            <%-- regularexpressionvalidator to prevent bad chars --%>
 
             <p>Company</p>
             <asp:CheckBoxList ID="CompanyCheckBoxList" runat="server" OnDataBinding="CompanyCheckBoxList_DataBinding" SelectMethod="CompanyCheckBox_GetData" DataTextField="CompanyName" DataValueField="CompanyID" RepeatColumns="3" RepeatDirection="Vertical" RepeatLayout="Table" TextAlign="Left"></asp:CheckBoxList>
 
-            <%--Text='<%#:BindItem.CompanyName  %>'--%>
-            <%-- VALIDATION --%>
-            <%-- requiredfieldvalidatior --%>
-            <%-- regularexpressionvalidator to prevent bad chars --%>
-
-
-            <p>Convention date</p>
-
-            <%--<asp:TextBox ID="DateTextBox" Text='<%#:BindItem.ConvenDate  %>' runat="server"></asp:TextBox>--%>
-            <%--Text='<%#:BindItem.ConvenDate  %>'--%>
-            <%-- requiredfieldvalidator --%>
-            <%-- regularexpressionvalidator to validate given date format --%>
-
             <div class="formItems">
                 <asp:Button ID="UploadButton" runat="server" Text="UpLoad" CommandName="Insert" />
             </div>
+
+            <%-- VALIDATION --%>
+            <asp:RequiredFieldValidator ControlToValidate="FirstNameTextBox" runat="server" ErrorMessage="First name is required." Display="None"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ControlToValidate="LastNameTextBox" runat="server" ErrorMessage="Last name is required." Display="None"></asp:RequiredFieldValidator>
         </InsertItemTemplate>
     </asp:FormView>
 

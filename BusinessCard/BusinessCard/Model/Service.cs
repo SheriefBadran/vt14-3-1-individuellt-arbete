@@ -44,32 +44,22 @@ namespace BusinessCard.Model
         }
 
         // PERSON METHODS
-        // METHOD USED!!
         public Person GetPerson(int personID)
         {
             return PersonDAL.GetPersonById(personID);
         }
 
-        // METHOD USED!!
         public IEnumerable<Person> GetPersons()
         {
             return PersonDAL.GetPersons();
         }
 
-        // METHOD USED
-        public void SavePerson(Person person)
+        public void UpdatePerson(Person person)
         {
             Validate(person);
 
-            if (person.PersonID == 0) // New post if ContactID is 0
-            {
-                //PersonDAL.CreatePerson(person);
-            }
-            else
-            {
-                // TODO: Call UpdatePerson from Service -> SavePerson()
-                PersonDAL.UpdatePerson(person);
-            }
+            // TODO: Call UpdatePerson from Service -> SavePerson()
+            PersonDAL.UpdatePerson(person);
         }
 
         // EMPLOYMENT METHODS

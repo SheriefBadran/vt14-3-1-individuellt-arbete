@@ -16,6 +16,9 @@
 <%-- CONTENT SECTION --%>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h3>Handle your business cards:</h3>
+
+    <asp:ValidationSummary HeaderText="Error!" DisplayMode="BulletList" runat="server" />
+
     <ul>
         <li>
             <asp:HyperLink ID="HyperLink1" runat="server" Text="Upload business card" NavigateUrl="<%$ RouteUrl:routename=BusinessCardCreate %>" />
@@ -71,13 +74,23 @@
                             <asp:Literal ID="CompanyNameLiteral" OnDataBinding="CompanyNameLiteral_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:Literal>
                         </td>
                         <td>
-                            <%--<asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl='<%# GetRouteUrl("BusinessCardUpdate", new { id = Item.PersonID })  %>' Text="Update name" />--%>
                             <asp:LinkButton runat="server" CommandName="Delete" Text="Delete" CausesValidation="false" 
                                 OnClientClick='<%# String.Format("return confirm(\"Delete {0} {1}?\")", Item.FirstName, Item.LastName) %>'/>
                             <asp:LinkButton ID="LinkButton3" runat="server" CommandName="Edit" Text="Edit" CausesValidation="false" />
                         </td>
                     </tr>
                 </ItemTemplate>
+
+                <EmptyDataTemplate>
+                    <%-- Message to display when database has no businessCards --%>
+                    <table class="grid">
+                        <tr>
+                            <td>
+                                There is no BusinessCards to list!
+                            </td>
+                        </tr>
+                    </table>
+                </EmptyDataTemplate>
 
                 <EditItemTemplate>
                     <tr>
@@ -88,18 +101,18 @@
                             <asp:TextBox ID="LastNameTextBox" Text='<%#:BindItem.LastName  %>' MaxLength="20" runat="server"></asp:TextBox>
                         </td>
                         <td>
-                            <%--<asp:DropDownList ID="DropDownListUpdate" runat="server" OnDataBinding="CompanyNameLiteral_DataBinding" DataTextField="CompanyName" DataValueField="CompanyID"></asp:DropDownList>--%>
-                            <%--<asp:TextBox ID="CompanyNameTextBox" OnDataBinding="CompanyNameTextBox_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:TextBox>--%>
                             <asp:Literal ID="CompanyNameLiteral" OnDataBinding="CompanyNameLiteral_DataBinding" runat="server" Text='<%#:Item.PersonID  %>'></asp:Literal>
                             
                         </td>
                         <td>
-                            <%-- Command Buttons for Update and Cancel - SET BUTTON VALIDATIONGROUP TO UPDATE --%>
-                            <%--<asp:HyperLink ID="HyperLink4" runat="server">HyperLink</asp:HyperLink>--%>
+                            <%-- Command Buttons for Update and Cancel --%>
                             <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Update" Text="Save" ValidationGroup="update" />
                             <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Cancel" Text="Cancel" CausesValidation="false" />
                         </td>
                     </tr>
+
+                    <asp:RequiredFieldValidator ControlToValidate="FirstNameTextBox" runat="server" ErrorMessage="First name is required." Display="None"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ControlToValidate="LastNameTextBox" runat="server" ErrorMessage="Last name is required." Display="None"></asp:RequiredFieldValidator>
                 </EditItemTemplate>
     </asp:ListView>
 </asp:Content>

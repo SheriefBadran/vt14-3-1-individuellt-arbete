@@ -8,8 +8,8 @@
     <asp:PlaceHolder runat="server">     
           <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>  
-    <webopt:BundleReference ID="BundleReference1" runat="server" Path="~/Content/css" /> 
-    <webopt:BundleReference ID="BundleReference2" runat="server" Path="~/Content/themes/base/css" /> 
+    <webopt:BundleReference ID="BundleReference1" runat="server" Path="~/Content/css" />
+    <webopt:BundleReference ID="BundleReference2" runat="server" Path="~/Content/themes/base/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
@@ -43,7 +43,7 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    <a runat="server" href="~/">your logo here</a>
+                    <a runat="server" href="~/">BusinessCard Network</a>
                 </p>
             </div>
             <div class="float-right">

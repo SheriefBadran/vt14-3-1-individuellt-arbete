@@ -33,13 +33,20 @@
 <asp:Content runat="server" ID="SearchForm" ContentPlaceHolderID="FormContent">
 
     <h3>Search a business card...</h3>
+
+    <%-- VALIDATION --%>
+    <asp:ValidationSummary HeaderText="Error!" DisplayMode="BulletList" runat="server" />
     
     <p><b>on company name</b></p>
+
     <asp:TextBox ID="CompanyNameTextBox"  MaxLength="40" Columns="40" runat="server" ClientIDMode="Static"></asp:TextBox>
 
     <div class="formItems">
         <asp:Button ID="FindButton" runat="server" OnClick="FindButton_Click" Text="Find" />
     </div>
+
+    <%-- VALIDATION --%>
+    <asp:RequiredFieldValidator  ControlToValidate="CompanyNameTextBox" runat="server" ErrorMessage="Company name is required." Display="None"></asp:RequiredFieldValidator>
 
     <asp:ListView ID="BusinessCardList" runat="server"
         ItemType="BusinessCard.Model.Person"
