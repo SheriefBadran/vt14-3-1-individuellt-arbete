@@ -7,7 +7,7 @@
             <hgroup class="title">
                 <%-- Set in Title attribute at the top of this page. --%>
                 <h1><%: Title %>.</h1>
-                <%--<h2>Welcome to your business card handler!</h2>--%>
+                <%--<h2>Welcome to your business card handler! </h2>--%>
             </hgroup>
         </div>
     </section>
